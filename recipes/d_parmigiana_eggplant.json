@@ -1,0 +1,35 @@
+{
+  "id": "d_parmigiana_eggplant",
+  "name": "Parmigiana di Melanzane (Eggplant Parmigiana)",
+  "type": "dinner",
+  "time": "55 min",
+  "kcal": 680,
+  "protein": 26,
+  "carbs": 25,
+  "fat": 57,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Eggplant (aubergine)", "qty": 175, "unit": "g", "cat": "Produce" },
+    { "item": "Tomato passata", "qty": 175, "unit": "ml", "cat": "Pantry" },
+    { "item": "Mozzarella (fior di latte)", "qty": 62, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Parmigiano Reggiano (grated)", "qty": 25, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Garlic", "qty": 1, "unit": "cloves", "cat": "Produce" },
+    { "item": "Fresh basil", "qty": 5, "unit": "g", "cat": "Produce" },
+    { "item": "Peanut or seed oil (for frying)", "qty": 30, "unit": "ml", "cat": "Pantry" },
+    { "item": "Extra-virgin olive oil", "qty": 5, "unit": "ml", "cat": "Pantry" },
+    { "item": "Coarse salt", "qty": 1, "unit": "tsp", "cat": "Pantry" },
+    { "item": "Fine salt", "qty": 0.25, "unit": "tsp", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Wash and slice the eggplant into rounds. Place in a bowl, sprinkle generously with coarse salt and let rest 20-30 min to draw out the bitter water. Rinse and pat dry.",
+    "Heat plenty of peanut/seed oil in a pan. When hot, fry the eggplant slices in batches until golden on both sides. Drain on paper towels.",
+    "Make the tomato sauce: heat olive oil and crushed garlic in a small pot. Add the passata and a pinch of salt, simmer 10 min, then stir in torn basil leaves and cook 5 more min.",
+    "Dice the mozzarella small and pat dry with paper towels to remove excess whey.",
+    "Spread a thin layer of tomato sauce on the bottom of a baking dish. Add a layer of fried eggplant, then more sauce, a generous sprinkle of grated parmesan, and scattered mozzarella cubes.",
+    "Repeat the layers (eggplant, sauce, parmesan, mozzarella) until all the ingredients are used up, finishing with parmesan on top.",
+    "Bake in a preheated fan oven at 180°C for about 30 min, until the surface is golden.",
+    "Remove from the oven and let rest a few minutes before slicing and serving."
+  ],
+  "tags": ["italian", "veggie", "comfort-food", "classic"]
+}

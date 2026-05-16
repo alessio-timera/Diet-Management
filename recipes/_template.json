@@ -1,0 +1,25 @@
+{
+  "id": "d_my_recipe",
+  "name": "My Recipe Name",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 700,
+  "protein": 48,
+  "carbs": 70,
+  "fat": 22,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chicken breast",  "qty": 200, "unit": "g",      "cat": "Protein"      },
+    { "item": "Olive oil",       "qty": 15,  "unit": "ml",     "cat": "Pantry"       },
+    { "item": "Garlic",          "qty": 2,   "unit": "cloves", "cat": "Produce"      },
+    { "item": "Cherry tomatoes", "qty": 150, "unit": "g",      "cat": "Produce"      },
+    { "item": "Parmesan cheese", "qty": 20,  "unit": "g",      "cat": "Dairy & Eggs" }
+  ],
+  "steps": [
+    "Step one.",
+    "Step two.",
+    "Step three."
+  ],
+  "tags": []
+}

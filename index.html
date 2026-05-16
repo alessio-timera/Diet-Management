@@ -157,14 +157,25 @@
   .day-head {
     display: flex; align-items: baseline; justify-content: space-between;
     border-bottom: 1px dashed var(--ink-soft);
-    padding-bottom: 10px; margin-bottom: 14px;
+    padding-bottom: 10px; margin-bottom: 0;
+    cursor: pointer; user-select: none;
   }
+  .day.is-open .day-head { margin-bottom: 14px; }
+  .day .meals, .day .day-macros-wrap { display: none; }
+  .day.is-open .meals, .day.is-open .day-macros-wrap { display: block; }
   .day-name { font-size: 26px; font-weight: 800; font-style: italic; letter-spacing: -0.01em; }
   .day-tag {
     font-family: 'JetBrains Mono', monospace;
     font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--ink-soft);
+    display: flex; align-items: center; gap: 8px;
   }
+  .day-chevron {
+    display: inline-block;
+    font-size: 14px; line-height: 1;
+    transition: transform 0.2s ease;
+  }
+  .day.is-open .day-chevron { transform: rotate(90deg); }
 
   /* MEAL CARDS */
   .meals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
@@ -207,6 +218,9 @@
   .whom-btn:last-child { border-right: 0; }
   .whom-btn.active {
     background: var(--ink); color: var(--paper);
+  }
+  .whom-btn[data-whom="anastasiia"].active {
+    background: var(--accent-2); color: var(--paper);
   }
   .whom-btn.active.both {
     background: var(--plum); color: var(--paper);
@@ -286,6 +300,28 @@
     color: var(--ink-soft);
     font-size: 13px;
   }
+
+  .day-prep-time {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--ink-soft);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  .day-macros-person {
+    margin-top: 12px;
+    padding-top: 10px;
+    border-top: 1px dashed var(--ink-soft);
+  }
+  .day-macros-person + .day-macros-person { margin-top: 8px; border-top: 1px dotted rgba(29,26,20,0.25); }
+  .person-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft); margin-bottom: 8px;
+  }
+  .day-macros-person > .day-macros { margin-top: 0; padding-top: 0; border-top: 0; }
 
   /* CONTROLS */
   .controls {
@@ -579,6 +615,9 @@
     align-items: center; justify-content: center;
   }
 
+  /* PROFILE SECTION IN SETTINGS */
+  .profile-section { margin-bottom: 40px; }
+
   /* COMING SOON */
   .coming-soon-wrap {
     border: 3px solid var(--ink); background: var(--paper-2);
@@ -643,9 +682,10 @@
 
   <nav class="tabs">
     <button class="tab active" data-tab="planner"><span class="num">01</span>Planner</button>
-    <button class="tab" data-tab="recipes"><span class="num">02</span>Recipe Book</button>
-    <button class="tab" data-tab="settings"><span class="num">03</span>Settings</button>
-    <button class="tab" data-tab="assistant"><span class="num">04</span>Chef</button>
+    <button class="tab" data-tab="shopping"><span class="num">02</span>Shopping</button>
+    <button class="tab" data-tab="recipes"><span class="num">03</span>Recipe Book</button>
+    <button class="tab" data-tab="settings"><span class="num">04</span>Settings</button>
+    <button class="tab" data-tab="assistant"><span class="num">05</span>Chef</button>
   </nav>
 
   <!-- PLANNER -->
@@ -672,7 +712,7 @@
     <div class="section-head">
       <span class="num">§ 01</span>
       <h2>Plan your week</h2>
-      <span class="meta">Tap <strong style="color:var(--ink);">Me</strong> or <strong style="color:var(--plum);">Both</strong> per meal · pescatarian-only when shared</span>
+      <span class="meta">Choose <strong style="color:var(--ink);">Alessio</strong>, <strong style="color:var(--accent-2);">Anastasiia</strong>, or <strong style="color:var(--plum);">Both</strong> per meal</span>
     </div>
 
     <div class="days" id="days"></div>
@@ -682,9 +722,12 @@
       <button class="btn ghost" id="randomBtn">Surprise Me</button>
       <button class="btn ghost" id="printBtn">Print Plan</button>
     </div>
+  </section>
 
+  <!-- SHOPPING -->
+  <section class="panel" id="panel-shopping">
     <div class="section-head">
-      <span class="num">§ 02</span>
+      <span class="num">§ 01</span>
       <h2>The shopping list</h2>
       <span class="meta" id="shopMeta">— meals selected</span>
     </div>
@@ -720,60 +763,118 @@
 
   <!-- SETTINGS -->
   <section class="panel" id="panel-settings">
+
+    <div class="profile-section">
+      <div class="section-head">
+        <span class="num">§ 01</span>
+        <h2>Alessio</h2>
+        <span class="meta">Macros recompute automatically</span>
+      </div>
+      <div class="settings-form">
+        <div class="settings-row">
+          <label for="s-weight">Weight (kg)</label>
+          <input type="number" id="s-weight" min="40" max="200" step="0.5">
+        </div>
+        <div class="settings-row">
+          <label for="s-height">Height (cm)</label>
+          <input type="number" id="s-height" min="140" max="220">
+        </div>
+        <div class="settings-row">
+          <label for="s-age">Age</label>
+          <input type="number" id="s-age" min="16" max="80">
+        </div>
+        <div class="settings-row">
+          <label for="s-sex">Sex</label>
+          <select id="s-sex">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <label for="s-goal">Goal</label>
+          <select id="s-goal">
+            <option value="fat_loss">Fat loss (-450 kcal)</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="muscle_gain">Muscle gain (+300 kcal)</option>
+            <option value="bulk">Aggressive bulk (+500 kcal)</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <label for="s-activity">Activity</label>
+          <select id="s-activity">
+            <option value="sedentary">Sedentary (desk job)</option>
+            <option value="light">Light (1-3 workouts/week)</option>
+            <option value="moderate">Moderate (3-5/week)</option>
+            <option value="high">High (6+/week)</option>
+          </select>
+        </div>
+      </div>
+      <div id="computedTargets"></div>
+      <div style="margin: 4px 0 0;">
+        <button class="btn" id="saveProfileBtn">Save Alessio</button>
+      </div>
+    </div>
+
+    <div class="profile-section">
+      <div class="section-head">
+        <span class="num">§ 02</span>
+        <h2>Anastasiia</h2>
+        <span class="meta">Pescatarian · macros recompute automatically</span>
+      </div>
+      <div class="settings-form">
+        <div class="settings-row">
+          <label for="a-weight">Weight (kg)</label>
+          <input type="number" id="a-weight" min="40" max="200" step="0.5">
+        </div>
+        <div class="settings-row">
+          <label for="a-height">Height (cm)</label>
+          <input type="number" id="a-height" min="140" max="220">
+        </div>
+        <div class="settings-row">
+          <label for="a-age">Age</label>
+          <input type="number" id="a-age" min="16" max="80">
+        </div>
+        <div class="settings-row">
+          <label for="a-sex">Sex</label>
+          <select id="a-sex">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <label for="a-goal">Goal</label>
+          <select id="a-goal">
+            <option value="fat_loss">Fat loss (-450 kcal)</option>
+            <option value="maintenance">Maintenance</option>
+            <option value="muscle_gain">Muscle gain (+300 kcal)</option>
+            <option value="bulk">Aggressive bulk (+500 kcal)</option>
+          </select>
+        </div>
+        <div class="settings-row">
+          <label for="a-activity">Activity</label>
+          <select id="a-activity">
+            <option value="sedentary">Sedentary (desk job)</option>
+            <option value="light">Light (1-3 workouts/week)</option>
+            <option value="moderate">Moderate (3-5/week)</option>
+            <option value="high">High (6+/week)</option>
+          </select>
+        </div>
+      </div>
+      <div id="computedTargetsA"></div>
+      <div style="margin: 4px 0 0;">
+        <button class="btn" id="saveProfileBtnA">Save Anastasiia</button>
+      </div>
+    </div>
+
     <div class="section-head">
-      <span class="num">§ 01</span>
-      <h2>Your profile</h2>
-      <span class="meta">Macros recompute automatically</span>
-    </div>
-
-    <div class="settings-form">
-      <div class="settings-row">
-        <label for="s-weight">Weight (kg)</label>
-        <input type="number" id="s-weight" min="40" max="200" step="0.5">
-      </div>
-      <div class="settings-row">
-        <label for="s-height">Height (cm)</label>
-        <input type="number" id="s-height" min="140" max="220">
-      </div>
-      <div class="settings-row">
-        <label for="s-age">Age</label>
-        <input type="number" id="s-age" min="16" max="80">
-      </div>
-      <div class="settings-row">
-        <label for="s-goal">Goal</label>
-        <select id="s-goal">
-          <option value="fat_loss">Fat loss (−450 kcal)</option>
-          <option value="maintenance">Maintenance</option>
-          <option value="muscle_gain">Muscle gain (+300 kcal)</option>
-          <option value="bulk">Aggressive bulk (+500 kcal)</option>
-        </select>
-      </div>
-      <div class="settings-row">
-        <label for="s-activity">Activity</label>
-        <select id="s-activity">
-          <option value="sedentary">Sedentary (desk job)</option>
-          <option value="light">Light (1–3 workouts/week)</option>
-          <option value="moderate">Moderate (3–5/week)</option>
-          <option value="high">High (6+/week)</option>
-        </select>
-      </div>
-    </div>
-
-    <div id="computedTargets"></div>
-
-    <div style="margin: 4px 0 32px;">
-      <button class="btn" id="saveProfileBtn">Save profile</button>
-    </div>
-
-    <div class="section-head">
-      <span class="num">§ 02</span>
+      <span class="num">§ 03</span>
       <h2>Backup & restore</h2>
       <span class="meta">Your data lives in this browser</span>
     </div>
 
     <div class="backup-row">
-      <button class="btn ghost" id="exportBtn">Export backup ↓</button>
-      <label class="btn ghost" for="importFile">Import backup ↑</label>
+      <button class="btn ghost" id="exportBtn">Export backup</button>
+      <label class="btn ghost" for="importFile">Import backup</label>
       <input type="file" id="importFile" accept=".json" style="display:none">
     </div>
   </section>
@@ -820,6 +921,15 @@ const DEFAULT_PROFILE = {
   activity: "light"
 };
 
+const DEFAULT_PROFILE_A = {
+  weight_kg: 60,
+  height_cm: 165,
+  age: 28,
+  sex: "female",
+  goal: "maintenance",
+  activity: "light"
+};
+
 function computeTargets(p) {
   const bmr = p.sex === "male"
     ? 10 * p.weight_kg + 6.25 * p.height_cm - 5 * p.age + 5
@@ -836,8 +946,10 @@ function computeTargets(p) {
   return { kcal, protein, carbs, fat };
 }
 
-let userProfile = { ...DEFAULT_PROFILE };
-let TARGETS = computeTargets(userProfile);
+let userProfile  = { ...DEFAULT_PROFILE };
+let userProfileA = { ...DEFAULT_PROFILE_A };
+let TARGETS  = computeTargets(userProfile);
+let TARGETS_A = computeTargets(userProfileA);
 
 /* ===========================================================
    RECIPES  (loaded async from /recipes/*.json)
@@ -863,16 +975,17 @@ const MEAL_TYPES = [
 let state = {};
 DAYS.forEach(day => {
   state[day] = {};
-  MEAL_TYPES.forEach(m => state[day][m.key] = { dish: "", whom: "me" });
+  MEAL_TYPES.forEach(m => state[day][m.key] = { dish: "", whom: "alessio" });
 });
 
 /* ===========================================================
    PERSISTENCE
    =========================================================== */
 const STORAGE_KEYS = {
-  state:   "weekly-plate:week",
-  recipes: "weekly-plate:ai-recipes",
-  profile: "weekly-plate:profile"
+  state:    "weekly-plate:week",
+  recipes:  "weekly-plate:ai-recipes",
+  profile:  "weekly-plate:profile",
+  profileA: "weekly-plate:profile-anastasiia"
 };
 
 function loadAll() {
@@ -886,6 +999,15 @@ function loadAll() {
   TARGETS = computeTargets(userProfile);
 
   try {
+    const raw = localStorage.getItem(STORAGE_KEYS.profileA);
+    if (raw) {
+      const p = JSON.parse(raw);
+      if (p && typeof p === "object") userProfileA = { ...DEFAULT_PROFILE_A, ...p };
+    }
+  } catch (e) {}
+  TARGETS_A = computeTargets(userProfileA);
+
+  try {
     const raw = localStorage.getItem(STORAGE_KEYS.state);
     if (raw) {
       const parsed = JSON.parse(raw);
@@ -894,9 +1016,11 @@ function loadAll() {
           if (parsed[d]) {
             MEAL_TYPES.forEach(m => {
               if (parsed[d][m.key]) {
-                state[d][m.key] = typeof parsed[d][m.key] === "string"
-                  ? { dish: parsed[d][m.key], whom: "me" }
-                  : { dish: parsed[d][m.key].dish || "", whom: parsed[d][m.key].whom || "me" };
+                let entry = typeof parsed[d][m.key] === "string"
+                  ? { dish: parsed[d][m.key], whom: "alessio" }
+                  : { dish: parsed[d][m.key].dish || "", whom: parsed[d][m.key].whom || "alessio" };
+                if (entry.whom === "me") entry.whom = "alessio";
+                state[d][m.key] = entry;
               }
             });
           }
@@ -937,8 +1061,9 @@ document.querySelectorAll(".tab").forEach(btn => {
     document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
     btn.classList.add("active");
     document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
-    if (btn.dataset.tab === "recipes") renderRecipeBook();
-    if (btn.dataset.tab === "settings") populateSettings();
+    if (btn.dataset.tab === "shopping")  renderShopping();
+    if (btn.dataset.tab === "recipes")   renderRecipeBook();
+    if (btn.dataset.tab === "settings")  populateSettings();
   });
 });
 
@@ -949,8 +1074,9 @@ const daysContainer = document.getElementById("days");
 
 function getDishesByType(whom) {
   const by = { breakfast: [], lunch: [], dinner: [] };
+  const pescOnly = whom === "both" || whom === "anastasiia";
   for (const [id, d] of Object.entries(DISHES)) {
-    if (whom === "both" && !d.pescatarian) continue;
+    if (pescOnly && !d.pescatarian) continue;
     by[d.type].push({ id, ...d });
   }
   for (const t of Object.keys(by)) {
@@ -970,11 +1096,14 @@ function buildDays() {
     card.innerHTML = `
       <div class="day-head">
         <div class="day-name">${day}</div>
-        <div class="day-tag">Day ${String(idx + 1).padStart(2, "0")}</div>
+        <div class="day-tag">Day ${String(idx + 1).padStart(2, "0")} <span class="day-chevron">›</span></div>
       </div>
       <div class="meals" data-day="${day}"></div>
       <div class="day-macros-wrap" data-day="${day}"></div>
     `;
+    card.querySelector(".day-head").addEventListener("click", () => {
+      card.classList.toggle("is-open");
+    });
     daysContainer.appendChild(card);
     renderMealsForDay(day);
     renderDayMacros(day);
@@ -986,16 +1115,16 @@ function renderMealsForDay(day) {
   if (!mealsEl) return;
 
   mealsEl.innerHTML = MEAL_TYPES.map(m => {
-    const whom = state[day][m.key].whom || "me";
+    const whom = state[day][m.key].whom || "alessio";
     const currentDish = state[day][m.key].dish || "";
     const dishes = getDishesByType(whom)[m.key];
 
-    let dishOptions = `<option value="">— choose a dish —</option><option value="skip">⊘ Skip (eating out)</option>`;
+    let dishOptions = `<option value="">— choose a dish —</option><option value="skip">&#8856; Skip (eating out)</option>`;
     for (const d of dishes) {
       const sel = d.id === currentDish ? " selected" : "";
-      const aiPrefix = d.source === "ai" ? "✨ " : "";
-      const pescIcon = d.pescatarian && whom === "me" ? " 🐟" : "";
-      dishOptions += `<option value="${d.id}"${sel}>${aiPrefix}${d.name}${pescIcon} · ${d.kcal} kcal · ${d.protein}g P</option>`;
+      const aiPrefix = d.source === "ai" ? "* " : "";
+      const pescIcon = d.pescatarian && whom === "alessio" ? " (pesc)" : "";
+      dishOptions += `<option value="${d.id}"${sel}>${aiPrefix}${d.name}${pescIcon} - ${d.kcal} kcal - ${d.protein}g P</option>`;
     }
     const skipSel = currentDish === "skip" ? " selected" : "";
     dishOptions = dishOptions.replace('<option value="skip">', `<option value="skip"${skipSel}>`);
@@ -1005,14 +1134,15 @@ function renderMealsForDay(day) {
       <div class="meal" data-meal="${m.key}">
         <div class="meal-label">
           <span>${m.label}</span>
-          <button class="skip-btn" data-day="${day}" data-meal="${m.key}">eating out ↗</button>
+          <button class="skip-btn" data-day="${day}" data-meal="${m.key}">eating out</button>
         </div>
         <div class="whom-toggle">
-          <button class="whom-btn ${whom === "me" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="me">👤 Me only</button>
-          <button class="whom-btn both ${whom === "both" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="both">👥 Both 🐟</button>
+          <button class="whom-btn ${whom === "alessio" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="alessio">Alessio</button>
+          <button class="whom-btn ${whom === "anastasiia" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="anastasiia">Anastasiia</button>
+          <button class="whom-btn both ${whom === "both" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="both">Both</button>
         </div>
         <select class="dish" data-day="${day}" data-meal="${m.key}">${dishOptions}</select>
-        <button class="recipe-link ${showRecipeLink ? "" : "empty"}" data-day="${day}" data-meal="${m.key}">View recipe →</button>
+        <button class="recipe-link ${showRecipeLink ? "" : "empty"}" data-day="${day}" data-meal="${m.key}">View recipe</button>
       </div>
     `;
   }).join("");
@@ -1021,17 +1151,16 @@ function renderMealsForDay(day) {
     btn.addEventListener("click", e => {
       const { day, meal, whom } = e.currentTarget.dataset;
       state[day][meal].whom = whom;
-      if (whom === "both") {
+      if (whom === "both" || whom === "anastasiia") {
         const cur = state[day][meal].dish;
         if (cur && cur !== "skip" && DISHES[cur] && !DISHES[cur].pescatarian) {
           state[day][meal].dish = "";
-          showToast("Dish cleared — was not pescatarian");
+          showToast("Dish cleared — not pescatarian");
         }
       }
       saveState();
       renderMealsForDay(day);
       renderDayMacros(day);
-      renderShopping();
     });
   });
 
@@ -1069,32 +1198,75 @@ function renderMealsForDay(day) {
 function renderDayMacros(day) {
   const wrap = daysContainer.querySelector(`.day-macros-wrap[data-day="${day}"]`);
   if (!wrap) return;
-  let kcal = 0, protein = 0, carbs = 0, fat = 0, hasMeals = false, sharedNote = false;
+
+  let aKcal = 0, aProtein = 0, aCarbs = 0, aFat = 0, hasA = false;
+  let nKcal = 0, nProtein = 0, nCarbs = 0, nFat = 0, hasN = false;
+
+  for (const m of MEAL_TYPES) {
+    const slot = state[day][m.key];
+    const id = slot.dish;
+    if (!id || id === "skip") continue;
+    const dish = DISHES[id];
+    if (!dish) continue;
+    const whom = slot.whom || "alessio";
+    if (whom === "alessio" || whom === "both") {
+      hasA = true;
+      aKcal    += dish.kcal    || 0;
+      aProtein += dish.protein || 0;
+      aCarbs   += dish.carbs   || 0;
+      aFat     += dish.fat     || 0;
+    }
+    if (whom === "anastasiia" || whom === "both") {
+      hasN = true;
+      nKcal    += dish.kcal    || 0;
+      nProtein += dish.protein || 0;
+      nCarbs   += dish.carbs   || 0;
+      nFat     += dish.fat     || 0;
+    }
+  }
+
+  if (!hasA && !hasN) {
+    wrap.innerHTML = `<div class="empty-day-macros">No meals planned.</div>`;
+    return;
+  }
+
+  let totalMins = 0;
   for (const m of MEAL_TYPES) {
     const id = state[day][m.key].dish;
     if (!id || id === "skip") continue;
     const dish = DISHES[id];
-    if (!dish) continue;
-    hasMeals = true;
-    kcal    += dish.kcal    || 0;
-    protein += dish.protein || 0;
-    carbs   += dish.carbs   || 0;
-    fat     += dish.fat     || 0;
-    if (state[day][m.key].whom === "both") sharedNote = true;
+    if (dish) totalMins += parseMinutes(dish.time);
   }
-  if (!hasMeals) {
-    wrap.innerHTML = `<div class="empty-day-macros">No meals planned · macros will appear here.</div>`;
-    return;
+  const prepLabel = totalMins >= 60
+    ? `${Math.floor(totalMins / 60)}h ${totalMins % 60 > 0 ? (totalMins % 60) + "min" : ""}`.trim()
+    : `${totalMins} min`;
+
+  let html = `<div class="day-prep-time">Prep: ${prepLabel}</div>`;
+  if (hasA) {
+    html += `
+      <div class="day-macros-person">
+        <div class="person-label">Alessio</div>
+        <div class="day-macros">
+          ${macroBar("Calories", aKcal,    TARGETS.kcal,    "kcal", "kcal")}
+          ${macroBar("Protein",  aProtein, TARGETS.protein, "g",    "protein")}
+          ${macroBar("Carbs",    aCarbs,   TARGETS.carbs,   "g",    "carbs")}
+          ${macroBar("Fat",      aFat,     TARGETS.fat,     "g",    "fat")}
+        </div>
+      </div>`;
   }
-  wrap.innerHTML = `
-    <div class="day-macros">
-      ${macroBar("Calories", kcal,    TARGETS.kcal,    "kcal", "kcal")}
-      ${macroBar("Protein",  protein, TARGETS.protein, "g",    "protein")}
-      ${macroBar("Carbs",    carbs,   TARGETS.carbs,   "g",    "carbs")}
-      ${macroBar("Fat",      fat,     TARGETS.fat,     "g",    "fat")}
-    </div>
-    ${sharedNote ? `<div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--plum);margin-top:8px;">▸ Shared meals — shopping list doubled, macros shown for your serving</div>` : ""}
-  `;
+  if (hasN) {
+    html += `
+      <div class="day-macros-person">
+        <div class="person-label">Anastasiia</div>
+        <div class="day-macros">
+          ${macroBar("Calories", nKcal,    TARGETS_A.kcal,    "kcal", "kcal")}
+          ${macroBar("Protein",  nProtein, TARGETS_A.protein, "g",    "protein")}
+          ${macroBar("Carbs",    nCarbs,   TARGETS_A.carbs,   "g",    "carbs")}
+          ${macroBar("Fat",      nFat,     TARGETS_A.fat,     "g",    "fat")}
+        </div>
+      </div>`;
+  }
+  wrap.innerHTML = html;
 }
 
 function macroBar(label, val, target, unit, cls) {
@@ -1159,6 +1331,12 @@ function renderShopping() {
   }
   html += `</div>`;
   shoppingList.innerHTML = html;
+}
+
+function parseMinutes(timeStr) {
+  if (!timeStr) return 0;
+  const m = timeStr.match(/(\d+)/);
+  return m ? parseInt(m[1]) : 0;
 }
 
 function formatQty(qty, unit) {
@@ -1289,9 +1467,18 @@ function populateSettings() {
   document.getElementById("s-weight").value   = userProfile.weight_kg;
   document.getElementById("s-height").value   = userProfile.height_cm;
   document.getElementById("s-age").value      = userProfile.age;
+  document.getElementById("s-sex").value      = userProfile.sex || "male";
   document.getElementById("s-goal").value     = userProfile.goal;
   document.getElementById("s-activity").value = userProfile.activity;
   renderComputedTargets();
+
+  document.getElementById("a-weight").value   = userProfileA.weight_kg;
+  document.getElementById("a-height").value   = userProfileA.height_cm;
+  document.getElementById("a-age").value      = userProfileA.age;
+  document.getElementById("a-sex").value      = userProfileA.sex || "female";
+  document.getElementById("a-goal").value     = userProfileA.goal;
+  document.getElementById("a-activity").value = userProfileA.activity;
+  renderComputedTargetsA();
 }
 
 function renderComputedTargets() {
@@ -1300,6 +1487,7 @@ function renderComputedTargets() {
     weight_kg: parseFloat(document.getElementById("s-weight").value) || userProfile.weight_kg,
     height_cm: parseFloat(document.getElementById("s-height").value) || userProfile.height_cm,
     age:       parseInt(document.getElementById("s-age").value)       || userProfile.age,
+    sex:       document.getElementById("s-sex").value,
     goal:      document.getElementById("s-goal").value,
     activity:  document.getElementById("s-activity").value
   };
@@ -1314,8 +1502,33 @@ function renderComputedTargets() {
   `;
 }
 
-["s-weight", "s-height", "s-age", "s-goal", "s-activity"].forEach(id => {
+function renderComputedTargetsA() {
+  const draft = {
+    ...userProfileA,
+    weight_kg: parseFloat(document.getElementById("a-weight").value) || userProfileA.weight_kg,
+    height_cm: parseFloat(document.getElementById("a-height").value) || userProfileA.height_cm,
+    age:       parseInt(document.getElementById("a-age").value)       || userProfileA.age,
+    sex:       document.getElementById("a-sex").value,
+    goal:      document.getElementById("a-goal").value,
+    activity:  document.getElementById("a-activity").value
+  };
+  const t = computeTargets(draft);
+  document.getElementById("computedTargetsA").innerHTML = `
+    <div class="targets-preview">
+      <div><span class="t-label">Calories</span><strong>${t.kcal.toLocaleString()}</strong></div>
+      <div><span class="t-label">Protein</span><strong>${t.protein}g</strong></div>
+      <div><span class="t-label">Carbs</span><strong>${t.carbs}g</strong></div>
+      <div><span class="t-label">Fat</span><strong>${t.fat}g</strong></div>
+    </div>
+  `;
+}
+
+["s-weight", "s-height", "s-age", "s-sex", "s-goal", "s-activity"].forEach(id => {
   document.getElementById(id).addEventListener("input", renderComputedTargets);
+});
+
+["a-weight", "a-height", "a-age", "a-sex", "a-goal", "a-activity"].forEach(id => {
+  document.getElementById(id).addEventListener("input", renderComputedTargetsA);
 });
 
 document.getElementById("saveProfileBtn").addEventListener("click", () => {
@@ -1331,6 +1544,7 @@ document.getElementById("saveProfileBtn").addEventListener("click", () => {
     weight_kg: w,
     height_cm: h,
     age:       a,
+    sex:       document.getElementById("s-sex").value,
     goal:      document.getElementById("s-goal").value,
     activity:  document.getElementById("s-activity").value
   };
@@ -1338,8 +1552,30 @@ document.getElementById("saveProfileBtn").addEventListener("click", () => {
   try { localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(userProfile)); } catch (e) {}
   updateStatsDisplay();
   buildDays();
-  renderShopping();
-  showToast("Profile saved · macros updated");
+  showToast("Alessio's profile saved");
+});
+
+document.getElementById("saveProfileBtnA").addEventListener("click", () => {
+  const w = parseFloat(document.getElementById("a-weight").value);
+  const h = parseFloat(document.getElementById("a-height").value);
+  const a = parseInt(document.getElementById("a-age").value);
+  if (!w || !h || !a || w < 40 || w > 200 || h < 140 || h > 220 || a < 16 || a > 80) {
+    showToast("Check your values — something looks off");
+    return;
+  }
+  userProfileA = {
+    ...userProfileA,
+    weight_kg: w,
+    height_cm: h,
+    age:       a,
+    sex:       document.getElementById("a-sex").value,
+    goal:      document.getElementById("a-goal").value,
+    activity:  document.getElementById("a-activity").value
+  };
+  TARGETS_A = computeTargets(userProfileA);
+  try { localStorage.setItem(STORAGE_KEYS.profileA, JSON.stringify(userProfileA)); } catch (e) {}
+  buildDays();
+  showToast("Anastasiia's profile saved");
 });
 
 function updateStatsDisplay() {
@@ -1360,9 +1596,10 @@ document.getElementById("exportBtn").addEventListener("click", () => {
     if (!BUILT_IN_IDS.has(id)) ai[id] = dish;
   }
   const data = {
-    week:       state,
-    ai_recipes: ai,
-    profile:    userProfile,
+    week:        state,
+    ai_recipes:  ai,
+    profile:     userProfile,
+    profileA:    userProfileA,
     exported_at: new Date().toISOString()
   };
   const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
@@ -1388,6 +1625,11 @@ document.getElementById("importFile").addEventListener("change", async e => {
       userProfile = { ...DEFAULT_PROFILE, ...data.profile };
       TARGETS = computeTargets(userProfile);
       try { localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(userProfile)); } catch (er) {}
+    }
+    if (data.profileA) {
+      userProfileA = { ...DEFAULT_PROFILE_A, ...data.profileA };
+      TARGETS_A = computeTargets(userProfileA);
+      try { localStorage.setItem(STORAGE_KEYS.profileA, JSON.stringify(userProfileA)); } catch (er) {}
     }
     if (data.week) {
       DAYS.forEach(d => {
@@ -1420,7 +1662,7 @@ document.getElementById("importFile").addEventListener("change", async e => {
 document.getElementById("resetBtn").addEventListener("click", () => {
   DAYS.forEach(day => {
     state[day] = {};
-    MEAL_TYPES.forEach(m => state[day][m.key] = { dish: "", whom: "me" });
+    MEAL_TYPES.forEach(m => state[day][m.key] = { dish: "", whom: "alessio" });
   });
   saveState();
   buildDays();
@@ -1428,7 +1670,7 @@ document.getElementById("resetBtn").addEventListener("click", () => {
 });
 
 document.getElementById("randomBtn").addEventListener("click", () => {
-  const byType = getDishesByType("me");
+  const byType = getDishesByType("alessio");
   const shuffled = [...DAYS].sort(() => Math.random() - 0.5);
   const homeDays = shuffled.slice(0, 4);
   const outDays  = shuffled.slice(4);
@@ -1436,17 +1678,17 @@ document.getElementById("randomBtn").addEventListener("click", () => {
     for (const m of MEAL_TYPES) {
       const list = byType[m.key];
       if (!list.length) continue;
-      state[day][m.key] = { dish: list[Math.floor(Math.random() * list.length)].id, whom: "me" };
+      state[day][m.key] = { dish: list[Math.floor(Math.random() * list.length)].id, whom: "alessio" };
     }
   }
   for (const day of outDays) {
     state[day] = {
-      breakfast: { dish: "", whom: "me" },
-      lunch:     { dish: "skip", whom: "me" },
-      dinner:    { dish: "skip", whom: "me" }
+      breakfast: { dish: "", whom: "alessio" },
+      lunch:     { dish: "skip", whom: "alessio" },
+      dinner:    { dish: "skip", whom: "alessio" }
     };
     const list = byType.breakfast;
-    if (list.length) state[day].breakfast = { dish: list[Math.floor(Math.random() * list.length)].id, whom: "me" };
+    if (list.length) state[day].breakfast = { dish: list[Math.floor(Math.random() * list.length)].id, whom: "alessio" };
   }
   saveState();
   buildDays();
