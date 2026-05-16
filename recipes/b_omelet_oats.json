@@ -1,0 +1,27 @@
+{
+  "id": "b_omelet_oats",
+  "name": "Cheese omelet + side oats",
+  "type": "breakfast",
+  "time": "12 min",
+  "kcal": 560,
+  "protein": 36,
+  "carbs": 42,
+  "fat": 26,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Eggs", "qty": 3, "unit": "pc", "cat": "Dairy & Eggs" },
+    { "item": "Cheddar or feta cheese", "qty": 25, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Spinach (fresh)", "qty": 40, "unit": "g", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 5, "unit": "ml", "cat": "Pantry" },
+    { "item": "Rolled oats", "qty": 40, "unit": "g", "cat": "Pantry" },
+    { "item": "Milk", "qty": 200, "unit": "ml", "cat": "Dairy & Eggs" }
+  ],
+  "steps": [
+    "Cook oats with milk in a small pot, 4-5 min, stir occasionally.",
+    "Heat oil in a non-stick pan, add spinach, wilt 1 min.",
+    "Beat eggs, pour over spinach, sprinkle cheese. Cook 2 min, fold, plate.",
+    "Serve with the warm oats."
+  ],
+  "tags": []
+}

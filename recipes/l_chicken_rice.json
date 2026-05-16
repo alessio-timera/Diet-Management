@@ -1,0 +1,28 @@
+{
+  "id": "l_chicken_rice",
+  "name": "Chicken & rice power bowl",
+  "type": "lunch",
+  "time": "20 min",
+  "kcal": 720,
+  "protein": 52,
+  "carbs": 78,
+  "fat": 18,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chicken breast", "qty": 180, "unit": "g", "cat": "Protein" },
+    { "item": "Basmati or long-grain rice", "qty": 80, "unit": "g", "cat": "Pantry" },
+    { "item": "Broccoli", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Cook rice per package instructions (~15 min).",
+    "Slice chicken breast horizontally into 2 thinner pieces, season with salt, pepper, paprika.",
+    "Heat half the oil in a pan, sear chicken 4 min per side. Rest 2 min, slice.",
+    "Steam or microwave broccoli with a splash of water, 4 min.",
+    "Plate rice, broccoli, chicken. Drizzle remaining oil, lemon, minced raw garlic."
+  ],
+  "tags": []
+}

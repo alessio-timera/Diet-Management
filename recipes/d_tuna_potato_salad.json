@@ -1,0 +1,28 @@
+{
+  "id": "d_tuna_potato_salad",
+  "name": "Warm tuna & potato bowl",
+  "type": "dinner",
+  "time": "20 min",
+  "kcal": 670,
+  "protein": 44,
+  "carbs": 60,
+  "fat": 26,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Canned tuna in olive oil", "qty": 160, "unit": "g", "cat": "Protein" },
+    { "item": "Potatoes", "qty": 300, "unit": "g", "cat": "Produce" },
+    { "item": "Eggs", "qty": 2, "unit": "pc", "cat": "Dairy & Eggs" },
+    { "item": "Cherry tomatoes", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Olives (kalamata)", "qty": 30, "unit": "g", "cat": "Pantry" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Cube potatoes, boil 12 min until tender.",
+    "Hard-boil eggs in same pot last 8 min, peel, halve.",
+    "Drain tuna lightly. Toss warm potatoes with tuna, halved tomatoes, olives.",
+    "Dress with olive oil, lemon, salt, pepper. Top with eggs."
+  ],
+  "tags": []
+}

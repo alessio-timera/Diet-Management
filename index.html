@@ -1,0 +1,1493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Weekly Plate — Muscle Plan</title>
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="The Weekly Plate">
+<meta name="theme-color" content="#f3ead8">
+<link rel="apple-touch-icon" href="icons/icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,500&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --paper:    #f3ead8;
+    --paper-2:  #ece1c9;
+    --ink:      #1d1a14;
+    --ink-soft: #4a4234;
+    --accent:   #b4391a;
+    --accent-2: #1f5d3a;
+    --gold:     #b88a2c;
+    --plum:     #6b2740;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--paper); color: var(--ink); }
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    font-feature-settings: "ss01", "ss02";
+    line-height: 1.5;
+    background-image:
+      radial-gradient(circle at 15% 12%, rgba(0,0,0,0.04) 0, transparent 40%),
+      radial-gradient(circle at 85% 80%, rgba(0,0,0,0.05) 0, transparent 35%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240' viewBox='0 0 240 240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.1  0 0 0 0 0.08  0 0 0 0 0.04  0 0 0 0.06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    min-height: 100vh;
+  }
+
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 32px 28px 80px; }
+
+  /* MASTHEAD */
+  .masthead {
+    border-top: 6px double var(--ink);
+    border-bottom: 6px double var(--ink);
+    padding: 22px 0 16px;
+    margin-bottom: 22px;
+  }
+  .kicker {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft);
+    border-bottom: 1px solid var(--ink); padding-bottom: 10px; margin-bottom: 14px;
+  }
+  .kicker span:nth-child(2) { color: var(--accent); font-weight: 600; }
+  h1.title {
+    font-weight: 900; font-style: italic;
+    font-size: clamp(48px, 9vw, 124px);
+    line-height: 0.88;
+    letter-spacing: -0.03em;
+    text-align: center;
+  }
+  h1.title em { font-style: normal; color: var(--accent); }
+  .deck {
+    text-align: center;
+    font-size: 14px; font-style: italic;
+    color: var(--ink-soft);
+    margin-top: 14px;
+  }
+  .ornament { text-align: center; color: var(--accent); font-size: 18px; margin: 8px 0; }
+
+  /* TABS */
+  .tabs {
+    display: flex; justify-content: center;
+    gap: 2px;
+    margin: 28px 0 26px;
+    border-bottom: 2px solid var(--ink);
+    flex-wrap: wrap;
+  }
+  .tab {
+    background: transparent;
+    border: 2px solid var(--ink);
+    border-bottom: 0;
+    padding: 12px 22px 11px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    cursor: pointer;
+    color: var(--ink);
+    margin-bottom: -2px;
+  }
+  .tab:hover { background: var(--paper-2); }
+  .tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tab .num { font-size: 9px; color: var(--accent); margin-right: 6px; }
+  .tab.active .num { color: var(--paper-2); }
+
+  .panel { display: none; }
+  .panel.active { display: block; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: none; }
+  }
+
+  /* STATS BAR */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 2px solid var(--ink);
+    background: var(--paper-2);
+    margin: 0 0 28px;
+  }
+  .stat { padding: 14px 16px; border-right: 1px solid var(--ink); }
+  .stat:last-child { border-right: 0; }
+  .stat .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .stat .value { font-size: 22px; font-weight: 700; margin-top: 2px; }
+  .stat .value small { font-size: 12px; font-weight: 500; color: var(--ink-soft); margin-left: 4px; }
+  @media (max-width: 720px) {
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--ink); }
+  }
+
+  /* SECTION HEADERS */
+  .section-head {
+    display: flex; align-items: baseline; gap: 16px;
+    border-bottom: 2px solid var(--ink);
+    padding-bottom: 8px; margin: 28px 0 22px;
+    flex-wrap: wrap;
+  }
+  .section-head h2 {
+    font-weight: 900; font-style: italic;
+    font-size: 36px; letter-spacing: -0.01em;
+  }
+  .section-head .num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--accent);
+    letter-spacing: 0.15em;
+  }
+  .section-head .meta {
+    margin-left: auto;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; color: var(--ink-soft); letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* DAYS */
+  .days { display: grid; gap: 18px; }
+  .day {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 18px 18px 16px;
+  }
+  .day-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px dashed var(--ink-soft);
+    padding-bottom: 10px; margin-bottom: 14px;
+  }
+  .day-name { font-size: 26px; font-weight: 800; font-style: italic; letter-spacing: -0.01em; }
+  .day-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* MEAL CARDS */
+  .meals { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  @media (max-width: 720px) { .meals { grid-template-columns: 1fr; } }
+  .meal { display: flex; flex-direction: column; gap: 6px; }
+  .meal-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent);
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .meal-label .skip-btn {
+    background: transparent; border: 0;
+    font-family: inherit; font-size: 10px; letter-spacing: 0.1em;
+    color: var(--ink-soft); cursor: pointer;
+    text-decoration: underline; text-underline-offset: 2px;
+  }
+  .meal-label .skip-btn:hover { color: var(--accent); }
+
+  /* For-whom toggle */
+  .whom-toggle {
+    display: inline-flex;
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    overflow: hidden;
+    margin-bottom: 4px;
+    width: 100%;
+  }
+  .whom-btn {
+    flex: 1;
+    background: transparent;
+    border: 0;
+    padding: 6px 8px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.14em; text-transform: uppercase;
+    cursor: pointer;
+    color: var(--ink-soft);
+    border-right: 1px solid var(--ink);
+  }
+  .whom-btn:last-child { border-right: 0; }
+  .whom-btn.active {
+    background: var(--ink); color: var(--paper);
+  }
+  .whom-btn.active.both {
+    background: var(--plum); color: var(--paper);
+  }
+  .whom-btn:hover:not(.active) { background: var(--paper-2); }
+
+  select.dish {
+    appearance: none; -webkit-appearance: none;
+    width: 100%;
+    background: var(--paper-2);
+    border: 1.5px solid var(--ink);
+    padding: 9px 32px 9px 12px;
+    font-family: 'Fraunces', serif;
+    font-size: 15px; color: var(--ink);
+    cursor: pointer;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%231d1a14' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+  select.dish:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .recipe-link {
+    background: transparent; border: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft); cursor: pointer;
+    text-align: left; padding: 0;
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+  .recipe-link:hover { color: var(--accent-2); }
+  .recipe-link.empty { visibility: hidden; }
+
+  /* MACRO BAR PER DAY */
+  .day-macros {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed var(--ink-soft);
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  @media (max-width: 600px) {
+    .day-macros { grid-template-columns: repeat(2, 1fr); gap: 8px 14px; }
+  }
+  .macro {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .macro-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.16em; text-transform: uppercase;
+  }
+  .macro-head .name { color: var(--ink-soft); }
+  .macro-head .vals { font-size: 11px; }
+  .macro-head .vals strong { color: var(--ink); font-weight: 700; }
+  .macro-head .vals span { color: var(--ink-soft); }
+  .macro-bar {
+    height: 6px;
+    background: var(--paper-2);
+    border: 1px solid var(--ink);
+    overflow: hidden;
+    position: relative;
+  }
+  .macro-fill {
+    height: 100%;
+    background: var(--accent);
+    transition: width 0.25s ease;
+  }
+  .macro-fill.kcal { background: var(--ink); }
+  .macro-fill.protein { background: var(--accent); }
+  .macro-fill.carbs { background: var(--gold); }
+  .macro-fill.fat { background: var(--accent-2); }
+  .macro-fill.over { background: var(--plum); }
+
+  .empty-day-macros {
+    margin-top: 10px;
+    font-style: italic;
+    color: var(--ink-soft);
+    font-size: 13px;
+  }
+
+  /* CONTROLS */
+  .controls {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin: 22px 0 8px;
+  }
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase;
+    padding: 10px 18px;
+    background: var(--ink); color: var(--paper);
+    border: 2px solid var(--ink);
+    cursor: pointer;
+  }
+  .btn.ghost { background: transparent; color: var(--ink); }
+  .btn:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+  .btn.ghost:hover { background: var(--ink); color: var(--paper); }
+
+  /* SHOPPING */
+  .shopping {
+    margin-top: 18px;
+    border: 3px solid var(--ink);
+    background: var(--paper-2);
+    padding: 26px;
+    position: relative;
+  }
+  .shopping::before {
+    content: ""; position: absolute; inset: 6px;
+    border: 1px solid var(--ink); pointer-events: none;
+  }
+  .shop-head {
+    display: flex; justify-content: space-between; align-items: baseline;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--ink); padding-bottom: 12px;
+  }
+  .shop-head h3 { font-size: 30px; font-style: italic; font-weight: 800; }
+  .shop-head .stamp {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent); border: 1.5px solid var(--accent);
+    padding: 4px 10px; transform: rotate(-2deg);
+  }
+  .shop-cats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+  }
+  .shop-cat h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-2);
+    border-bottom: 1px solid var(--ink-soft);
+    padding-bottom: 6px; margin-bottom: 10px;
+  }
+  .shop-cat ul { list-style: none; }
+  .shop-cat li {
+    display: flex; justify-content: space-between; gap: 10px;
+    padding: 5px 0;
+    font-size: 15px;
+    border-bottom: 1px dotted rgba(29,26,20,0.2);
+  }
+  .shop-cat li:last-child { border-bottom: 0; }
+  .shop-cat li .qty {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; font-weight: 600;
+    color: var(--ink); white-space: nowrap;
+  }
+  .empty-shop {
+    font-style: italic; color: var(--ink-soft);
+    padding: 16px 0; text-align: center;
+  }
+
+  /* RECIPE BOOK */
+  .filters {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  .filter-pill {
+    border: 1.5px solid var(--ink);
+    background: var(--paper);
+    padding: 7px 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.16em; text-transform: uppercase;
+    cursor: pointer;
+  }
+  .filter-pill:hover { background: var(--paper-2); }
+  .filter-pill.active { background: var(--ink); color: var(--paper); }
+
+  .recipe-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 18px;
+  }
+  .recipe-card {
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    padding: 18px 18px 16px;
+    cursor: pointer;
+    display: flex; flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+  }
+  .recipe-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .recipe-card .type-tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+    display: flex; gap: 8px; align-items: center;
+  }
+  .recipe-card .pesc-tag {
+    color: var(--accent-2);
+    border: 1px solid var(--accent-2);
+    padding: 1px 5px;
+    font-size: 8px;
+  }
+  .recipe-card .ai-badge {
+    position: absolute; top: 10px; right: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 8px; letter-spacing: 0.18em;
+    background: var(--accent-2); color: var(--paper);
+    padding: 3px 7px;
+  }
+  .recipe-card h3 {
+    font-size: 22px; font-weight: 800; font-style: italic;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .recipe-card .macros {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px dashed var(--ink-soft);
+  }
+  .recipe-card .macros strong { color: var(--ink); }
+
+  /* MODAL */
+  .modal-bg {
+    position: fixed; inset: 0;
+    background: rgba(15,12,8,0.6);
+    display: none; align-items: center; justify-content: center;
+    padding: 20px; z-index: 100;
+  }
+  .modal-bg.show { display: flex; }
+  .modal {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    max-width: 620px; width: 100%;
+    max-height: 86vh; overflow-y: auto;
+    padding: 28px 30px 32px;
+    position: relative;
+  }
+  .modal h3 {
+    font-size: 30px; font-style: italic; font-weight: 800;
+    margin-bottom: 4px;
+    padding-right: 40px;
+  }
+  .modal .modal-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.1em;
+    color: var(--ink-soft); margin-bottom: 18px;
+    padding-bottom: 12px; border-bottom: 1px solid var(--ink);
+  }
+  .modal .modal-meta strong { color: var(--accent); }
+  .modal h4 {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent-2);
+    margin: 16px 0 8px;
+  }
+  .modal ul, .modal ol { margin-left: 18px; }
+  .modal li { margin-bottom: 6px; font-size: 15px; }
+  .modal-close {
+    position: absolute; top: 14px; right: 16px;
+    background: transparent; border: 1.5px solid var(--ink);
+    width: 32px; height: 32px; cursor: pointer;
+    font-size: 18px; line-height: 1;
+    font-family: serif;
+  }
+  .modal-close:hover { background: var(--ink); color: var(--paper); }
+  .modal-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+  .modal-actions button {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+    padding: 8px 14px;
+    background: transparent; border: 1.5px solid var(--ink);
+    cursor: pointer;
+  }
+  .modal-actions button:hover { background: var(--ink); color: var(--paper); }
+  .modal-actions button.danger:hover { background: var(--accent); border-color: var(--accent); color: var(--paper); }
+
+  /* TOAST */
+  .toast {
+    position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--paper);
+    padding: 12px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+    z-index: 200;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+  .toast.show { opacity: 1; }
+
+  .footer {
+    margin-top: 50px; padding-top: 18px;
+    border-top: 6px double var(--ink);
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+
+  /* LOADING SCREEN */
+  .loading-screen {
+    display: flex; align-items: center; justify-content: center;
+    min-height: 320px; flex-direction: column; gap: 14px;
+  }
+  .loading-screen .loading-title {
+    font-size: clamp(32px, 6vw, 56px); font-weight: 900; font-style: italic;
+    letter-spacing: -0.02em;
+  }
+  .loading-screen .loading-title em { color: var(--accent); font-style: normal; }
+  .loading-screen .loading-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--ink-soft);
+    animation: pulse 1.4s infinite ease-in-out;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 1; } }
+
+  /* SETTINGS */
+  .settings-form { max-width: 580px; margin-bottom: 8px; }
+  .settings-row {
+    display: grid; grid-template-columns: 160px 1fr;
+    align-items: center; gap: 16px;
+    padding: 12px 0;
+    border-bottom: 1px dotted rgba(29,26,20,0.2);
+  }
+  .settings-row label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .settings-row input, .settings-row select {
+    background: var(--paper-2);
+    border: 1.5px solid var(--ink);
+    padding: 9px 12px;
+    font-family: 'Fraunces', serif;
+    font-size: 16px; color: var(--ink);
+    width: 100%;
+  }
+  .settings-row select {
+    appearance: none; -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path d='M1 1l5 5 5-5' stroke='%231d1a14' stroke-width='1.5' fill='none' stroke-linecap='round'/></svg>");
+    background-repeat: no-repeat; background-position: right 12px center;
+    padding-right: 34px;
+  }
+  .settings-row input:focus, .settings-row select:focus {
+    outline: 2px solid var(--accent); outline-offset: 1px;
+  }
+  @media (max-width: 500px) {
+    .settings-row { grid-template-columns: 1fr; gap: 6px; }
+  }
+
+  .targets-preview {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 12px; margin: 18px 0 22px;
+    border: 2px solid var(--ink); background: var(--paper-2);
+    padding: 16px;
+  }
+  .targets-preview > div { display: flex; flex-direction: column; gap: 4px; text-align: center; }
+  .targets-preview .t-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--ink-soft);
+  }
+  .targets-preview strong { font-size: 20px; font-weight: 800; }
+  @media (max-width: 500px) { .targets-preview { grid-template-columns: repeat(2, 1fr); } }
+
+  .backup-row {
+    display: flex; gap: 12px; flex-wrap: wrap; margin: 0 0 32px;
+  }
+  .backup-row .btn, .backup-row label.btn {
+    cursor: pointer; display: inline-flex;
+    align-items: center; justify-content: center;
+  }
+
+  /* COMING SOON */
+  .coming-soon-wrap {
+    border: 3px solid var(--ink); background: var(--paper-2);
+    padding: 60px 40px; text-align: center; position: relative;
+  }
+  .coming-soon-wrap::before {
+    content: ""; position: absolute; inset: 6px;
+    border: 1px solid var(--ink); pointer-events: none;
+  }
+  .coming-soon-wrap .big-ornament { font-size: 44px; color: var(--accent); margin-bottom: 18px; }
+  .coming-soon-wrap h3 {
+    font-size: 38px; font-style: italic; font-weight: 900; margin-bottom: 16px;
+  }
+  .coming-soon-wrap h3 em { color: var(--accent); font-style: normal; }
+  .coming-soon-wrap p {
+    font-size: 17px; color: var(--ink-soft); max-width: 480px;
+    margin: 0 auto 14px; line-height: 1.65;
+  }
+  .coming-soon-wrap code {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px;
+    background: rgba(0,0,0,0.07); padding: 2px 6px;
+  }
+  .coming-soon-tag {
+    display: inline-block; margin-top: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--accent); border: 1.5px solid var(--accent);
+    padding: 6px 16px; transform: rotate(-1.5deg);
+  }
+
+  /* MOBILE POLISH */
+  @media (max-width: 480px) {
+    .wrap { padding: 18px 14px 60px; }
+    .tabs { margin: 18px 0 16px; }
+    .tab { padding: 10px 12px 9px; font-size: 10px; letter-spacing: 0.12em; }
+    .tab .num { display: none; }
+    .day { padding: 14px 12px 12px; }
+    .day-name { font-size: 22px; }
+    select.dish { font-size: 14px; padding: 8px 28px 8px 10px; }
+    .whom-btn { padding: 6px 4px; font-size: 8px; }
+    .section-head h2 { font-size: 26px; }
+    .shopping { padding: 16px; }
+    .shop-head h3 { font-size: 24px; }
+    .coming-soon-wrap { padding: 40px 20px; }
+    .coming-soon-wrap h3 { font-size: 28px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="masthead">
+    <div class="kicker">
+      <span>VOL. I — NO. 03</span>
+      <span>FOR THE BUILDER & THE PESCATARIAN</span>
+      <span>HOME COOKING DEPT.</span>
+    </div>
+    <h1 class="title">The Weekly <em>Plate</em></h1>
+    <div class="ornament">✦  ✦  ✦</div>
+    <p class="deck">Plan for one or two · track your macros · build your shopping list.</p>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="planner"><span class="num">01</span>Planner</button>
+    <button class="tab" data-tab="recipes"><span class="num">02</span>Recipe Book</button>
+    <button class="tab" data-tab="settings"><span class="num">03</span>Settings</button>
+    <button class="tab" data-tab="assistant"><span class="num">04</span>Chef</button>
+  </nav>
+
+  <!-- PLANNER -->
+  <section class="panel active" id="panel-planner">
+    <div class="stats">
+      <div class="stat">
+        <div class="label">Daily Target</div>
+        <div class="value" id="stat-kcal">2,800 <small>kcal</small></div>
+      </div>
+      <div class="stat">
+        <div class="label">Protein</div>
+        <div class="value" id="stat-protein">144 <small>g/day</small></div>
+      </div>
+      <div class="stat">
+        <div class="label">Carbs / Fat</div>
+        <div class="value" id="stat-carbsfat">— / — <small>g</small></div>
+      </div>
+      <div class="stat">
+        <div class="label">Training</div>
+        <div class="value">2-3× <small>/ week</small></div>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <span class="num">§ 01</span>
+      <h2>Plan your week</h2>
+      <span class="meta">Tap <strong style="color:var(--ink);">Me</strong> or <strong style="color:var(--plum);">Both</strong> per meal · pescatarian-only when shared</span>
+    </div>
+
+    <div class="days" id="days"></div>
+
+    <div class="controls">
+      <button class="btn" id="resetBtn">Reset Week</button>
+      <button class="btn ghost" id="randomBtn">Surprise Me</button>
+      <button class="btn ghost" id="printBtn">Print Plan</button>
+    </div>
+
+    <div class="section-head">
+      <span class="num">§ 02</span>
+      <h2>The shopping list</h2>
+      <span class="meta" id="shopMeta">— meals selected</span>
+    </div>
+
+    <div class="shopping">
+      <div class="shop-head">
+        <h3>What to buy <em style="color:var(--accent);font-style:italic;">this week</em></h3>
+        <div class="stamp">Auto-totaled · 2× when shared</div>
+      </div>
+      <div id="shoppingList"></div>
+    </div>
+  </section>
+
+  <!-- RECIPE BOOK -->
+  <section class="panel" id="panel-recipes">
+    <div class="section-head">
+      <span class="num">§ 01</span>
+      <h2>Recipe book</h2>
+      <span class="meta" id="recipeCount">— recipes</span>
+    </div>
+
+    <div class="filters" id="recipeFilters">
+      <button class="filter-pill active" data-filter="all">All</button>
+      <button class="filter-pill" data-filter="breakfast">Breakfasts</button>
+      <button class="filter-pill" data-filter="lunch">Lunches</button>
+      <button class="filter-pill" data-filter="dinner">Dinners</button>
+      <button class="filter-pill" data-filter="pescatarian">Pescatarian 🐟</button>
+      <button class="filter-pill" data-filter="ai">From AI ✨</button>
+    </div>
+
+    <div class="recipe-grid" id="recipeGrid"></div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="panel" id="panel-settings">
+    <div class="section-head">
+      <span class="num">§ 01</span>
+      <h2>Your profile</h2>
+      <span class="meta">Macros recompute automatically</span>
+    </div>
+
+    <div class="settings-form">
+      <div class="settings-row">
+        <label for="s-weight">Weight (kg)</label>
+        <input type="number" id="s-weight" min="40" max="200" step="0.5">
+      </div>
+      <div class="settings-row">
+        <label for="s-height">Height (cm)</label>
+        <input type="number" id="s-height" min="140" max="220">
+      </div>
+      <div class="settings-row">
+        <label for="s-age">Age</label>
+        <input type="number" id="s-age" min="16" max="80">
+      </div>
+      <div class="settings-row">
+        <label for="s-goal">Goal</label>
+        <select id="s-goal">
+          <option value="fat_loss">Fat loss (−450 kcal)</option>
+          <option value="maintenance">Maintenance</option>
+          <option value="muscle_gain">Muscle gain (+300 kcal)</option>
+          <option value="bulk">Aggressive bulk (+500 kcal)</option>
+        </select>
+      </div>
+      <div class="settings-row">
+        <label for="s-activity">Activity</label>
+        <select id="s-activity">
+          <option value="sedentary">Sedentary (desk job)</option>
+          <option value="light">Light (1–3 workouts/week)</option>
+          <option value="moderate">Moderate (3–5/week)</option>
+          <option value="high">High (6+/week)</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="computedTargets"></div>
+
+    <div style="margin: 4px 0 32px;">
+      <button class="btn" id="saveProfileBtn">Save profile</button>
+    </div>
+
+    <div class="section-head">
+      <span class="num">§ 02</span>
+      <h2>Backup & restore</h2>
+      <span class="meta">Your data lives in this browser</span>
+    </div>
+
+    <div class="backup-row">
+      <button class="btn ghost" id="exportBtn">Export backup ↓</button>
+      <label class="btn ghost" for="importFile">Import backup ↑</label>
+      <input type="file" id="importFile" accept=".json" style="display:none">
+    </div>
+  </section>
+
+  <!-- CHEF ASSISTANT -->
+  <section class="panel" id="panel-assistant">
+    <div class="section-head">
+      <span class="num">§ 01</span>
+      <h2>Chef in the margins</h2>
+      <span class="meta">Coming in v2</span>
+    </div>
+
+    <div class="coming-soon-wrap">
+      <div class="big-ornament">✦</div>
+      <h3>Your Kitchen <em>Consigliere</em></h3>
+      <p>The chef assistant is coming soon. Once live, it will suggest new recipes tailored to your profile — and everything the chef cooks up joins your recipe book with a single click.</p>
+      <p>In the meantime, add a recipe manually: create a <code>.json</code> file in the <code>/recipes</code> folder and add its ID to <code>recipes/index.json</code>, then push to GitHub.</p>
+      <div class="coming-soon-tag">Coming in v2</div>
+    </div>
+  </section>
+
+  <div class="footer">— end of issue · cook well, lift heavy —</div>
+</div>
+
+<div class="modal-bg" id="modalBg">
+  <div class="modal" id="modal">
+    <button class="modal-close" id="modalClose">×</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ===========================================================
+   PROFILE & TARGETS
+   =========================================================== */
+const DEFAULT_PROFILE = {
+  weight_kg: 80,
+  height_cm: 178,
+  age: 30,
+  sex: "male",
+  goal: "muscle_gain",
+  activity: "light"
+};
+
+function computeTargets(p) {
+  const bmr = p.sex === "male"
+    ? 10 * p.weight_kg + 6.25 * p.height_cm - 5 * p.age + 5
+    : 10 * p.weight_kg + 6.25 * p.height_cm - 5 * p.age - 161;
+  const factors = { sedentary: 1.2, light: 1.375, moderate: 1.55, high: 1.725 };
+  const tdee = bmr * (factors[p.activity] || 1.375);
+  const adjustments = { fat_loss: -450, maintenance: 0, muscle_gain: 300, bulk: 500 };
+  const kcal = Math.round(tdee + (adjustments[p.goal] !== undefined ? adjustments[p.goal] : 300));
+  const protein = Math.round(p.weight_kg * 1.8);
+  const minFat = Math.round(p.weight_kg * 0.7);
+  const remaining = kcal - protein * 4;
+  const fat = Math.max(minFat, Math.round(remaining * 0.35 / 9));
+  const carbs = Math.max(0, Math.round((remaining - fat * 9) / 4));
+  return { kcal, protein, carbs, fat };
+}
+
+let userProfile = { ...DEFAULT_PROFILE };
+let TARGETS = computeTargets(userProfile);
+
+/* ===========================================================
+   RECIPES  (loaded async from /recipes/*.json)
+   =========================================================== */
+let DISHES = {};
+let BUILT_IN_IDS = new Set();
+
+async function loadRecipes() {
+  const index = await fetch("recipes/index.json").then(r => r.json());
+  const all = await Promise.all(
+    index.map(id => fetch("recipes/" + id + ".json").then(r => r.json()))
+  );
+  return Object.fromEntries(all.map(r => [r.id, r]));
+}
+
+const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const MEAL_TYPES = [
+  { key: "breakfast", label: "Breakfast" },
+  { key: "lunch",     label: "Lunch"     },
+  { key: "dinner",    label: "Dinner"    }
+];
+
+let state = {};
+DAYS.forEach(day => {
+  state[day] = {};
+  MEAL_TYPES.forEach(m => state[day][m.key] = { dish: "", whom: "me" });
+});
+
+/* ===========================================================
+   PERSISTENCE
+   =========================================================== */
+const STORAGE_KEYS = {
+  state:   "weekly-plate:week",
+  recipes: "weekly-plate:ai-recipes",
+  profile: "weekly-plate:profile"
+};
+
+function loadAll() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.profile);
+    if (raw) {
+      const p = JSON.parse(raw);
+      if (p && typeof p === "object") userProfile = { ...DEFAULT_PROFILE, ...p };
+    }
+  } catch (e) {}
+  TARGETS = computeTargets(userProfile);
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.state);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        DAYS.forEach(d => {
+          if (parsed[d]) {
+            MEAL_TYPES.forEach(m => {
+              if (parsed[d][m.key]) {
+                state[d][m.key] = typeof parsed[d][m.key] === "string"
+                  ? { dish: parsed[d][m.key], whom: "me" }
+                  : { dish: parsed[d][m.key].dish || "", whom: parsed[d][m.key].whom || "me" };
+              }
+            });
+          }
+        });
+      }
+    }
+  } catch (e) {}
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.recipes);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") {
+        for (const [id, dish] of Object.entries(parsed)) DISHES[id] = dish;
+      }
+    }
+  } catch (e) {}
+}
+
+function saveState() {
+  try { localStorage.setItem(STORAGE_KEYS.state, JSON.stringify(state)); } catch (e) {}
+}
+
+function saveAIRecipes() {
+  const ai = {};
+  for (const [id, dish] of Object.entries(DISHES)) {
+    if (!BUILT_IN_IDS.has(id)) ai[id] = dish;
+  }
+  try { localStorage.setItem(STORAGE_KEYS.recipes, JSON.stringify(ai)); } catch (e) {}
+}
+
+/* ===========================================================
+   TABS
+   =========================================================== */
+document.querySelectorAll(".tab").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("panel-" + btn.dataset.tab).classList.add("active");
+    if (btn.dataset.tab === "recipes") renderRecipeBook();
+    if (btn.dataset.tab === "settings") populateSettings();
+  });
+});
+
+/* ===========================================================
+   PLANNER
+   =========================================================== */
+const daysContainer = document.getElementById("days");
+
+function getDishesByType(whom) {
+  const by = { breakfast: [], lunch: [], dinner: [] };
+  for (const [id, d] of Object.entries(DISHES)) {
+    if (whom === "both" && !d.pescatarian) continue;
+    by[d.type].push({ id, ...d });
+  }
+  for (const t of Object.keys(by)) {
+    by[t].sort((a, b) => {
+      if (a.source !== b.source) return a.source === "built-in" ? -1 : 1;
+      return a.name.localeCompare(b.name);
+    });
+  }
+  return by;
+}
+
+function buildDays() {
+  daysContainer.innerHTML = "";
+  DAYS.forEach((day, idx) => {
+    const card = document.createElement("div");
+    card.className = "day";
+    card.innerHTML = `
+      <div class="day-head">
+        <div class="day-name">${day}</div>
+        <div class="day-tag">Day ${String(idx + 1).padStart(2, "0")}</div>
+      </div>
+      <div class="meals" data-day="${day}"></div>
+      <div class="day-macros-wrap" data-day="${day}"></div>
+    `;
+    daysContainer.appendChild(card);
+    renderMealsForDay(day);
+    renderDayMacros(day);
+  });
+}
+
+function renderMealsForDay(day) {
+  const mealsEl = daysContainer.querySelector(`.meals[data-day="${day}"]`);
+  if (!mealsEl) return;
+
+  mealsEl.innerHTML = MEAL_TYPES.map(m => {
+    const whom = state[day][m.key].whom || "me";
+    const currentDish = state[day][m.key].dish || "";
+    const dishes = getDishesByType(whom)[m.key];
+
+    let dishOptions = `<option value="">— choose a dish —</option><option value="skip">⊘ Skip (eating out)</option>`;
+    for (const d of dishes) {
+      const sel = d.id === currentDish ? " selected" : "";
+      const aiPrefix = d.source === "ai" ? "✨ " : "";
+      const pescIcon = d.pescatarian && whom === "me" ? " 🐟" : "";
+      dishOptions += `<option value="${d.id}"${sel}>${aiPrefix}${d.name}${pescIcon} · ${d.kcal} kcal · ${d.protein}g P</option>`;
+    }
+    const skipSel = currentDish === "skip" ? " selected" : "";
+    dishOptions = dishOptions.replace('<option value="skip">', `<option value="skip"${skipSel}>`);
+    const showRecipeLink = currentDish && currentDish !== "skip" && DISHES[currentDish];
+
+    return `
+      <div class="meal" data-meal="${m.key}">
+        <div class="meal-label">
+          <span>${m.label}</span>
+          <button class="skip-btn" data-day="${day}" data-meal="${m.key}">eating out ↗</button>
+        </div>
+        <div class="whom-toggle">
+          <button class="whom-btn ${whom === "me" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="me">👤 Me only</button>
+          <button class="whom-btn both ${whom === "both" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="both">👥 Both 🐟</button>
+        </div>
+        <select class="dish" data-day="${day}" data-meal="${m.key}">${dishOptions}</select>
+        <button class="recipe-link ${showRecipeLink ? "" : "empty"}" data-day="${day}" data-meal="${m.key}">View recipe →</button>
+      </div>
+    `;
+  }).join("");
+
+  mealsEl.querySelectorAll(".whom-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const { day, meal, whom } = e.currentTarget.dataset;
+      state[day][meal].whom = whom;
+      if (whom === "both") {
+        const cur = state[day][meal].dish;
+        if (cur && cur !== "skip" && DISHES[cur] && !DISHES[cur].pescatarian) {
+          state[day][meal].dish = "";
+          showToast("Dish cleared — was not pescatarian");
+        }
+      }
+      saveState();
+      renderMealsForDay(day);
+      renderDayMacros(day);
+      renderShopping();
+    });
+  });
+
+  mealsEl.querySelectorAll("select.dish").forEach(sel => {
+    sel.addEventListener("change", e => {
+      const { day, meal } = e.target.dataset;
+      state[day][meal].dish = e.target.value;
+      saveState();
+      renderMealsForDay(day);
+      renderDayMacros(day);
+      renderShopping();
+    });
+  });
+
+  mealsEl.querySelectorAll(".skip-btn").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const { day, meal } = e.currentTarget.dataset;
+      state[day][meal].dish = "skip";
+      saveState();
+      renderMealsForDay(day);
+      renderDayMacros(day);
+      renderShopping();
+    });
+  });
+
+  mealsEl.querySelectorAll(".recipe-link").forEach(btn => {
+    btn.addEventListener("click", e => {
+      const { day, meal } = e.currentTarget.dataset;
+      const id = state[day][meal].dish;
+      if (id && id !== "skip") openRecipe(id);
+    });
+  });
+}
+
+function renderDayMacros(day) {
+  const wrap = daysContainer.querySelector(`.day-macros-wrap[data-day="${day}"]`);
+  if (!wrap) return;
+  let kcal = 0, protein = 0, carbs = 0, fat = 0, hasMeals = false, sharedNote = false;
+  for (const m of MEAL_TYPES) {
+    const id = state[day][m.key].dish;
+    if (!id || id === "skip") continue;
+    const dish = DISHES[id];
+    if (!dish) continue;
+    hasMeals = true;
+    kcal    += dish.kcal    || 0;
+    protein += dish.protein || 0;
+    carbs   += dish.carbs   || 0;
+    fat     += dish.fat     || 0;
+    if (state[day][m.key].whom === "both") sharedNote = true;
+  }
+  if (!hasMeals) {
+    wrap.innerHTML = `<div class="empty-day-macros">No meals planned · macros will appear here.</div>`;
+    return;
+  }
+  wrap.innerHTML = `
+    <div class="day-macros">
+      ${macroBar("Calories", kcal,    TARGETS.kcal,    "kcal", "kcal")}
+      ${macroBar("Protein",  protein, TARGETS.protein, "g",    "protein")}
+      ${macroBar("Carbs",    carbs,   TARGETS.carbs,   "g",    "carbs")}
+      ${macroBar("Fat",      fat,     TARGETS.fat,     "g",    "fat")}
+    </div>
+    ${sharedNote ? `<div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:0.14em;text-transform:uppercase;color:var(--plum);margin-top:8px;">▸ Shared meals — shopping list doubled, macros shown for your serving</div>` : ""}
+  `;
+}
+
+function macroBar(label, val, target, unit, cls) {
+  const pct = Math.min(100, Math.round((val / target) * 100));
+  const over = val > target * 1.05;
+  return `
+    <div class="macro">
+      <div class="macro-head">
+        <span class="name">${label}</span>
+        <span class="vals"><strong>${Math.round(val)}</strong><span> / ${target}${unit}</span></span>
+      </div>
+      <div class="macro-bar"><div class="macro-fill ${over ? "over" : cls}" style="width:${pct}%"></div></div>
+    </div>
+  `;
+}
+
+/* ===========================================================
+   SHOPPING LIST
+   =========================================================== */
+const shopMeta     = document.getElementById("shopMeta");
+const shoppingList = document.getElementById("shoppingList");
+
+function renderShopping() {
+  const totals = {};
+  let mealCount = 0, sharedCount = 0;
+  for (const day of DAYS) {
+    for (const m of MEAL_TYPES) {
+      const slot = state[day][m.key];
+      if (!slot.dish || slot.dish === "skip") continue;
+      mealCount++;
+      const multiplier = slot.whom === "both" ? 2 : 1;
+      if (multiplier === 2) sharedCount++;
+      const dish = DISHES[slot.dish];
+      if (!dish) continue;
+      dish.ingredients.forEach(ing => {
+        const k = `${ing.cat}::${ing.item}::${ing.unit}`;
+        if (!totals[k]) totals[k] = { cat: ing.cat, item: ing.item, qty: 0, unit: ing.unit };
+        totals[k].qty += ing.qty * multiplier;
+      });
+    }
+  }
+  shopMeta.textContent = `${mealCount} meal${mealCount === 1 ? "" : "s"} · ${sharedCount} shared`;
+  if (mealCount === 0) {
+    shoppingList.innerHTML = `<div class="empty-shop">Pick some dishes above and your shopping list will appear here, magically tallied.</div>`;
+    return;
+  }
+  const byCat = {};
+  for (const t of Object.values(totals)) {
+    if (!byCat[t.cat]) byCat[t.cat] = [];
+    byCat[t.cat].push(t);
+  }
+  const catOrder = ["Protein", "Produce", "Dairy & Eggs", "Pantry", "Bakery", "Frozen"];
+  let html = `<div class="shop-cats">`;
+  for (const cat of catOrder) {
+    if (!byCat[cat]) continue;
+    byCat[cat].sort((a, b) => a.item.localeCompare(b.item));
+    html += `<div class="shop-cat"><h4>${cat}</h4><ul>`;
+    for (const t of byCat[cat]) {
+      html += `<li><span>${t.item}</span><span class="qty">${formatQty(t.qty, t.unit)}</span></li>`;
+    }
+    html += `</ul></div>`;
+  }
+  html += `</div>`;
+  shoppingList.innerHTML = html;
+}
+
+function formatQty(qty, unit) {
+  let q = qty, u = unit;
+  if (unit === "g"  && q >= 1000) { q = q / 1000; u = "kg"; }
+  if (unit === "ml" && q >= 1000) { q = q / 1000; u = "l";  }
+  if (u === "kg" || u === "l") q = Math.round(q * 100) / 100;
+  else if (u === "g" || u === "ml") q = Math.round(q);
+  else q = Math.round(q * 2) / 2;
+  if (["pc","slices","cloves","tbsp","tsp","tsp each"].includes(u)) {
+    const label = (q === 1 && u === "pc") ? "piece" : (u === "pc") ? "pieces" : u;
+    return `${q} ${label}`;
+  }
+  return `${q} ${u}`;
+}
+
+/* ===========================================================
+   RECIPE MODAL
+   =========================================================== */
+const modalBg      = document.getElementById("modalBg");
+const modalContent = document.getElementById("modalContent");
+
+function openRecipe(id) {
+  const d = DISHES[id];
+  if (!d) return;
+  modalContent.innerHTML = `
+    <h3>${d.name}</h3>
+    <div class="modal-meta">
+      <strong>${d.kcal} kcal</strong> · <strong>${d.protein}g P</strong> · ${d.carbs || "?"}g C · ${d.fat || "?"}g F · ${d.time} · 1 serving
+      ${d.pescatarian
+        ? `<br><span style="color:var(--accent-2);">🐟 Pescatarian</span>`
+        : `<br><span style="color:var(--accent);">🥩 Contains meat</span>`}
+      ${d.source === "ai" ? `<br><span style="color:var(--accent-2);">✨ AI-added recipe</span>` : ""}
+    </div>
+    <h4>Ingredients</h4>
+    <ul>${d.ingredients.map(i => `<li>${formatQty(i.qty, i.unit)} — ${i.item}</li>`).join("")}</ul>
+    <h4>Method</h4>
+    <ol>${d.steps.map(s => `<li>${s}</li>`).join("")}</ol>
+    ${d.source === "ai" ? `
+      <div class="modal-actions">
+        <button class="danger" onclick="deleteRecipe('${id}')">Remove from book</button>
+      </div>` : ""}
+  `;
+  modalBg.classList.add("show");
+}
+
+document.getElementById("modalClose").addEventListener("click", () => modalBg.classList.remove("show"));
+modalBg.addEventListener("click", e => { if (e.target === modalBg) modalBg.classList.remove("show"); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") modalBg.classList.remove("show"); });
+
+function deleteRecipe(id) {
+  if (!confirm("Remove this recipe? Any week-plan slots using it will be cleared.")) return;
+  delete DISHES[id];
+  for (const day of DAYS) {
+    for (const m of MEAL_TYPES) {
+      if (state[day][m.key].dish === id) state[day][m.key].dish = "";
+    }
+  }
+  saveAIRecipes();
+  saveState();
+  modalBg.classList.remove("show");
+  buildDays();
+  renderShopping();
+  renderRecipeBook();
+  showToast("Recipe removed");
+}
+window.deleteRecipe = deleteRecipe;
+
+/* ===========================================================
+   RECIPE BOOK
+   =========================================================== */
+const recipeGrid  = document.getElementById("recipeGrid");
+const recipeCount = document.getElementById("recipeCount");
+let activeFilter = "all";
+
+document.querySelectorAll("#recipeFilters .filter-pill").forEach(pill => {
+  pill.addEventListener("click", () => {
+    document.querySelectorAll("#recipeFilters .filter-pill").forEach(p => p.classList.remove("active"));
+    pill.classList.add("active");
+    activeFilter = pill.dataset.filter;
+    renderRecipeBook();
+  });
+});
+
+function renderRecipeBook() {
+  let entries = Object.entries(DISHES);
+  if      (activeFilter === "ai")          entries = entries.filter(([_, d]) => !BUILT_IN_IDS.has(_));
+  else if (activeFilter === "pescatarian") entries = entries.filter(([_, d]) => d.pescatarian);
+  else if (activeFilter !== "all")         entries = entries.filter(([_, d]) => d.type === activeFilter);
+
+  entries.sort((a, b) => {
+    const aAI = !BUILT_IN_IDS.has(a[0]), bAI = !BUILT_IN_IDS.has(b[0]);
+    if (aAI !== bAI) return aAI ? -1 : 1;
+    return a[1].name.localeCompare(b[1].name);
+  });
+
+  recipeCount.textContent = `${entries.length} recipe${entries.length === 1 ? "" : "s"}`;
+  if (entries.length === 0) {
+    recipeGrid.innerHTML = `<div class="empty-shop" style="grid-column:1/-1;">No recipes match this filter.</div>`;
+    return;
+  }
+  recipeGrid.innerHTML = entries.map(([id, d]) => `
+    <div class="recipe-card" data-id="${id}">
+      ${!BUILT_IN_IDS.has(id) ? `<div class="ai-badge">AI</div>` : ""}
+      <div class="type-tag">
+        <span>${d.type}</span>
+        ${d.pescatarian ? `<span class="pesc-tag">🐟 Pescatarian</span>` : ""}
+      </div>
+      <h3>${d.name}</h3>
+      <div class="macros">
+        <span><strong>${d.kcal}</strong> kcal</span>
+        <span><strong>${d.protein}g</strong> P</span>
+        <span>${d.carbs || "?"}g C</span>
+        <span>${d.fat || "?"}g F</span>
+        <span>${d.time}</span>
+      </div>
+    </div>
+  `).join("");
+  recipeGrid.querySelectorAll(".recipe-card").forEach(card => {
+    card.addEventListener("click", () => openRecipe(card.dataset.id));
+  });
+}
+
+/* ===========================================================
+   SETTINGS
+   =========================================================== */
+function populateSettings() {
+  document.getElementById("s-weight").value   = userProfile.weight_kg;
+  document.getElementById("s-height").value   = userProfile.height_cm;
+  document.getElementById("s-age").value      = userProfile.age;
+  document.getElementById("s-goal").value     = userProfile.goal;
+  document.getElementById("s-activity").value = userProfile.activity;
+  renderComputedTargets();
+}
+
+function renderComputedTargets() {
+  const draft = {
+    ...userProfile,
+    weight_kg: parseFloat(document.getElementById("s-weight").value) || userProfile.weight_kg,
+    height_cm: parseFloat(document.getElementById("s-height").value) || userProfile.height_cm,
+    age:       parseInt(document.getElementById("s-age").value)       || userProfile.age,
+    goal:      document.getElementById("s-goal").value,
+    activity:  document.getElementById("s-activity").value
+  };
+  const t = computeTargets(draft);
+  document.getElementById("computedTargets").innerHTML = `
+    <div class="targets-preview">
+      <div><span class="t-label">Calories</span><strong>${t.kcal.toLocaleString()}</strong></div>
+      <div><span class="t-label">Protein</span><strong>${t.protein}g</strong></div>
+      <div><span class="t-label">Carbs</span><strong>${t.carbs}g</strong></div>
+      <div><span class="t-label">Fat</span><strong>${t.fat}g</strong></div>
+    </div>
+  `;
+}
+
+["s-weight", "s-height", "s-age", "s-goal", "s-activity"].forEach(id => {
+  document.getElementById(id).addEventListener("input", renderComputedTargets);
+});
+
+document.getElementById("saveProfileBtn").addEventListener("click", () => {
+  const w = parseFloat(document.getElementById("s-weight").value);
+  const h = parseFloat(document.getElementById("s-height").value);
+  const a = parseInt(document.getElementById("s-age").value);
+  if (!w || !h || !a || w < 40 || w > 200 || h < 140 || h > 220 || a < 16 || a > 80) {
+    showToast("Check your values — something looks off");
+    return;
+  }
+  userProfile = {
+    ...userProfile,
+    weight_kg: w,
+    height_cm: h,
+    age:       a,
+    goal:      document.getElementById("s-goal").value,
+    activity:  document.getElementById("s-activity").value
+  };
+  TARGETS = computeTargets(userProfile);
+  try { localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(userProfile)); } catch (e) {}
+  updateStatsDisplay();
+  buildDays();
+  renderShopping();
+  showToast("Profile saved · macros updated");
+});
+
+function updateStatsDisplay() {
+  const kcalEl     = document.getElementById("stat-kcal");
+  const proteinEl  = document.getElementById("stat-protein");
+  const carbsfatEl = document.getElementById("stat-carbsfat");
+  if (kcalEl)     kcalEl.innerHTML     = `${TARGETS.kcal.toLocaleString()} <small>kcal</small>`;
+  if (proteinEl)  proteinEl.innerHTML  = `${TARGETS.protein} <small>g/day</small>`;
+  if (carbsfatEl) carbsfatEl.innerHTML = `${TARGETS.carbs} / ${TARGETS.fat} <small>g</small>`;
+}
+
+/* ===========================================================
+   EXPORT / IMPORT
+   =========================================================== */
+document.getElementById("exportBtn").addEventListener("click", () => {
+  const ai = {};
+  for (const [id, dish] of Object.entries(DISHES)) {
+    if (!BUILT_IN_IDS.has(id)) ai[id] = dish;
+  }
+  const data = {
+    week:       state,
+    ai_recipes: ai,
+    profile:    userProfile,
+    exported_at: new Date().toISOString()
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `weekly-plate-${new Date().toISOString().split("T")[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("Backup downloaded");
+});
+
+document.getElementById("importFile").addEventListener("change", async e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const data = JSON.parse(text);
+    if (!confirm("This will overwrite your current week plan and saved recipes. Continue?")) {
+      e.target.value = "";
+      return;
+    }
+    if (data.profile) {
+      userProfile = { ...DEFAULT_PROFILE, ...data.profile };
+      TARGETS = computeTargets(userProfile);
+      try { localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(userProfile)); } catch (er) {}
+    }
+    if (data.week) {
+      DAYS.forEach(d => {
+        if (data.week[d]) {
+          MEAL_TYPES.forEach(m => {
+            if (data.week[d][m.key]) state[d][m.key] = data.week[d][m.key];
+          });
+        }
+      });
+      saveState();
+    }
+    if (data.ai_recipes) {
+      for (const [id, dish] of Object.entries(data.ai_recipes)) DISHES[id] = dish;
+      saveAIRecipes();
+    }
+    updateStatsDisplay();
+    populateSettings();
+    buildDays();
+    renderShopping();
+    showToast("Backup restored");
+  } catch (err) {
+    showToast("Import failed — invalid file");
+  }
+  e.target.value = "";
+});
+
+/* ===========================================================
+   CONTROLS
+   =========================================================== */
+document.getElementById("resetBtn").addEventListener("click", () => {
+  DAYS.forEach(day => {
+    state[day] = {};
+    MEAL_TYPES.forEach(m => state[day][m.key] = { dish: "", whom: "me" });
+  });
+  saveState();
+  buildDays();
+  renderShopping();
+});
+
+document.getElementById("randomBtn").addEventListener("click", () => {
+  const byType = getDishesByType("me");
+  const shuffled = [...DAYS].sort(() => Math.random() - 0.5);
+  const homeDays = shuffled.slice(0, 4);
+  const outDays  = shuffled.slice(4);
+  for (const day of homeDays) {
+    for (const m of MEAL_TYPES) {
+      const list = byType[m.key];
+      if (!list.length) continue;
+      state[day][m.key] = { dish: list[Math.floor(Math.random() * list.length)].id, whom: "me" };
+    }
+  }
+  for (const day of outDays) {
+    state[day] = {
+      breakfast: { dish: "", whom: "me" },
+      lunch:     { dish: "skip", whom: "me" },
+      dinner:    { dish: "skip", whom: "me" }
+    };
+    const list = byType.breakfast;
+    if (list.length) state[day].breakfast = { dish: list[Math.floor(Math.random() * list.length)].id, whom: "me" };
+  }
+  saveState();
+  buildDays();
+  renderShopping();
+});
+
+document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+/* ===========================================================
+   TOAST
+   =========================================================== */
+const toastEl = document.getElementById("toast");
+function showToast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add("show");
+  clearTimeout(showToast._t);
+  showToast._t = setTimeout(() => toastEl.classList.remove("show"), 1800);
+}
+
+/* ===========================================================
+   INIT
+   =========================================================== */
+(async function init() {
+  daysContainer.innerHTML = `
+    <div class="loading-screen">
+      <div class="loading-title">The Weekly <em>Plate</em></div>
+      <div class="loading-sub">Loading your kitchen…</div>
+    </div>`;
+  try {
+    const recipes = await loadRecipes();
+    DISHES = { ...recipes };
+    BUILT_IN_IDS = new Set(Object.keys(recipes));
+  } catch (err) {
+    console.error("Failed to load recipes:", err);
+    showToast("Could not load recipes — check your connection");
+  }
+  loadAll();
+  updateStatsDisplay();
+  buildDays();
+  renderShopping();
+})();
+</script>
+</body>
+</html>

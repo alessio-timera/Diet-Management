@@ -1,0 +1,28 @@
+{
+  "id": "d_beef_stir_fry",
+  "name": "Beef & broccoli stir-fry",
+  "type": "dinner",
+  "time": "20 min",
+  "kcal": 700,
+  "protein": 48,
+  "carbs": 75,
+  "fat": 18,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Beef strips (sirloin or rump)", "qty": 180, "unit": "g", "cat": "Protein" },
+    { "item": "Broccoli", "qty": 200, "unit": "g", "cat": "Produce" },
+    { "item": "Basmati or long-grain rice", "qty": 80, "unit": "g", "cat": "Pantry" },
+    { "item": "Soy sauce", "qty": 20, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Ginger", "qty": 10, "unit": "g", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Cook rice per package instructions.",
+    "Heat oil in a wok. Sear beef strips 2 min, remove.",
+    "Add broccoli florets, splash of water, cover 3 min.",
+    "Add minced garlic, ginger, return beef. Add soy sauce, toss 1 min. Serve over rice."
+  ],
+  "tags": []
+}

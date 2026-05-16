@@ -1,0 +1,28 @@
+{
+  "id": "l_chicken_wrap",
+  "name": "Grilled chicken wrap",
+  "type": "lunch",
+  "time": "15 min",
+  "kcal": 690,
+  "protein": 48,
+  "carbs": 65,
+  "fat": 22,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chicken breast", "qty": 160, "unit": "g", "cat": "Protein" },
+    { "item": "Large tortilla wraps (whole wheat)", "qty": 2, "unit": "pc", "cat": "Bakery" },
+    { "item": "Greek yogurt (0-2% fat)", "qty": 50, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Cucumber", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Lettuce", "qty": 60, "unit": "g", "cat": "Produce" },
+    { "item": "Cherry tomatoes", "qty": 80, "unit": "g", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 5, "unit": "ml", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Slice chicken thin, season, grill or pan-fry 3 min per side.",
+    "Mix Greek yogurt with salt, pepper, a splash of lemon for sauce.",
+    "Warm tortillas. Spread sauce, layer lettuce, sliced cucumber, tomatoes, chicken.",
+    "Roll tight, slice in half."
+  ],
+  "tags": []
+}

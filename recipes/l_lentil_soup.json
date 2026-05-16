@@ -1,0 +1,28 @@
+{
+  "id": "l_lentil_soup",
+  "name": "Hearty lentil & sausage soup",
+  "type": "lunch",
+  "time": "25 min",
+  "kcal": 680,
+  "protein": 42,
+  "carbs": 78,
+  "fat": 18,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Red lentils", "qty": 120, "unit": "g", "cat": "Pantry" },
+    { "item": "Smoked turkey sausage", "qty": 120, "unit": "g", "cat": "Protein" },
+    { "item": "Carrot", "qty": 1, "unit": "pc", "cat": "Produce" },
+    { "item": "Onion", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" },
+    { "item": "Whole-grain bread", "qty": 2, "unit": "slices", "cat": "Bakery" }
+  ],
+  "steps": [
+    "Dice onion, carrot, garlic. Sauté in oil 4 min in a medium pot.",
+    "Add sliced sausage, brown 2 min.",
+    "Add rinsed lentils + 600 ml water, salt, pepper. Simmer 18 min.",
+    "Mash slightly for body. Serve with toasted bread."
+  ],
+  "tags": []
+}

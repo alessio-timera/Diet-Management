@@ -1,0 +1,29 @@
+{
+  "id": "d_lentil_chicken",
+  "name": "Sheet-pan chicken & lentils",
+  "type": "dinner",
+  "time": "30 min",
+  "kcal": 710,
+  "protein": 55,
+  "carbs": 70,
+  "fat": 18,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chicken breast", "qty": 200, "unit": "g", "cat": "Protein" },
+    { "item": "Green or brown lentils (cooked, canned ok)", "qty": 240, "unit": "g", "cat": "Pantry" },
+    { "item": "Cherry tomatoes", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Bell pepper", "qty": 1, "unit": "pc", "cat": "Produce" },
+    { "item": "Red onion", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Heat oven to 200°C.",
+    "Slice peppers, onion. Toss on tray with oil, garlic, salt, paprika.",
+    "Lay seasoned chicken on top. Roast 22 min.",
+    "Warm lentils in microwave/pot. Plate lentils, top with chicken and veg, lemon."
+  ],
+  "tags": []
+}

@@ -1,0 +1,28 @@
+{
+  "id": "l_beef_burrito_bowl",
+  "name": "Beef burrito bowl",
+  "type": "lunch",
+  "time": "20 min",
+  "kcal": 740,
+  "protein": 50,
+  "carbs": 75,
+  "fat": 22,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Lean ground beef (5% fat)", "qty": 160, "unit": "g", "cat": "Protein" },
+    { "item": "Basmati or long-grain rice", "qty": 80, "unit": "g", "cat": "Pantry" },
+    { "item": "Black beans (canned)", "qty": 120, "unit": "g", "cat": "Pantry" },
+    { "item": "Bell pepper", "qty": 1, "unit": "pc", "cat": "Produce" },
+    { "item": "Avocado", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Lime", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Cumin & paprika", "qty": 1, "unit": "tsp each", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Cook rice per package instructions.",
+    "Brown beef in a dry pan, breaking it up. Add cumin, paprika, salt.",
+    "Add diced bell pepper, cook 4 min. Stir in drained beans, warm through.",
+    "Plate over rice, top with avocado slices and a squeeze of lime."
+  ],
+  "tags": []
+}

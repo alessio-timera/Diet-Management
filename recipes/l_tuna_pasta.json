@@ -1,0 +1,27 @@
+{
+  "id": "l_tuna_pasta",
+  "name": "Tuna & tomato pasta",
+  "type": "lunch",
+  "time": "15 min",
+  "kcal": 700,
+  "protein": 45,
+  "carbs": 80,
+  "fat": 18,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Whole-wheat pasta", "qty": 100, "unit": "g", "cat": "Pantry" },
+    { "item": "Canned tuna in olive oil", "qty": 160, "unit": "g", "cat": "Protein" },
+    { "item": "Cherry tomatoes", "qty": 200, "unit": "g", "cat": "Produce" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" },
+    { "item": "Parmesan cheese", "qty": 20, "unit": "g", "cat": "Dairy & Eggs" }
+  ],
+  "steps": [
+    "Boil pasta in salted water per package time.",
+    "Meanwhile heat olive oil, add sliced garlic and halved tomatoes. Cook 5 min, mash gently.",
+    "Drain tuna lightly, add to pan with a splash of pasta water.",
+    "Toss drained pasta with sauce, top with parmesan."
+  ],
+  "tags": []
+}

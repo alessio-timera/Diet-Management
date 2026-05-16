@@ -1,0 +1,25 @@
+{
+  "id": "b_oats_yogurt",
+  "name": "Greek yogurt & oats bowl",
+  "type": "breakfast",
+  "time": "5 min",
+  "kcal": 520,
+  "protein": 38,
+  "carbs": 75,
+  "fat": 11,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Greek yogurt (0-2% fat)", "qty": 200, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Rolled oats", "qty": 60, "unit": "g", "cat": "Pantry" },
+    { "item": "Banana", "qty": 1, "unit": "pc", "cat": "Produce" },
+    { "item": "Honey", "qty": 15, "unit": "g", "cat": "Pantry" },
+    { "item": "Mixed nuts (almonds/walnuts)", "qty": 20, "unit": "g", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Mix oats with a splash of milk or water in a bowl, let sit 2 min.",
+    "Top with Greek yogurt, sliced banana, nuts, and a drizzle of honey.",
+    "Eat immediately or take it to go."
+  ],
+  "tags": []
+}

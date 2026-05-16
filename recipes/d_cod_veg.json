@@ -1,0 +1,28 @@
+{
+  "id": "d_cod_veg",
+  "name": "Baked cod with roasted veg",
+  "type": "dinner",
+  "time": "30 min",
+  "kcal": 650,
+  "protein": 48,
+  "carbs": 60,
+  "fat": 20,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Cod fillet", "qty": 200, "unit": "g", "cat": "Protein" },
+    { "item": "Potatoes", "qty": 250, "unit": "g", "cat": "Produce" },
+    { "item": "Bell pepper", "qty": 1, "unit": "pc", "cat": "Produce" },
+    { "item": "Cherry tomatoes", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Heat oven to 200°C. Cube potatoes, slice peppers.",
+    "Toss veg with oil, garlic, salt on a tray. Roast 20 min.",
+    "Make space, add seasoned cod and tomatoes. Bake 12 min more.",
+    "Squeeze lemon over everything before serving."
+  ],
+  "tags": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "d_turkey_meatballs",
+  "name": "Turkey meatballs in tomato sauce",
+  "type": "dinner",
+  "time": "30 min",
+  "kcal": 720,
+  "protein": 52,
+  "carbs": 75,
+  "fat": 20,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Ground turkey", "qty": 200, "unit": "g", "cat": "Protein" },
+    { "item": "Whole-wheat pasta", "qty": 90, "unit": "g", "cat": "Pantry" },
+    { "item": "Canned crushed tomatoes", "qty": 250, "unit": "g", "cat": "Pantry" },
+    { "item": "Onion", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Egg", "qty": 1, "unit": "pc", "cat": "Dairy & Eggs" },
+    { "item": "Breadcrumbs", "qty": 25, "unit": "g", "cat": "Pantry" },
+    { "item": "Parmesan cheese", "qty": 15, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Mix turkey with breadcrumbs, egg, half the minced garlic, salt, pepper. Form 8-10 balls.",
+    "Brown meatballs in oiled pan, 5 min, remove.",
+    "Sauté onion, remaining garlic 3 min. Add tomatoes, simmer.",
+    "Return meatballs, cook 12 min covered. Serve over boiled pasta with parmesan."
+  ],
+  "tags": []
+}

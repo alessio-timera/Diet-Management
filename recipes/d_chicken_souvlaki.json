@@ -1,0 +1,30 @@
+{
+  "id": "d_chicken_souvlaki",
+  "name": "Chicken souvlaki bowl",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 700,
+  "protein": 50,
+  "carbs": 55,
+  "fat": 26,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chicken breast", "qty": 200, "unit": "g", "cat": "Protein" },
+    { "item": "Pita bread", "qty": 1, "unit": "pc", "cat": "Bakery" },
+    { "item": "Greek yogurt (0-2% fat)", "qty": 100, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Cucumber", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Cherry tomatoes", "qty": 100, "unit": "g", "cat": "Produce" },
+    { "item": "Red onion", "qty": 0.25, "unit": "pc", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Garlic", "qty": 1, "unit": "cloves", "cat": "Produce" }
+  ],
+  "steps": [
+    "Cube chicken, marinate 10 min in oil, lemon, garlic, oregano, salt.",
+    "Grate cucumber, squeeze dry. Mix with yogurt, garlic for tzatziki.",
+    "Pan-fry or grill chicken 8-10 min, turning.",
+    "Warm pita. Plate everything with chopped tomatoes and red onion."
+  ],
+  "tags": []
+}

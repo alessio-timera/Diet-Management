@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" fill="#f3ead8"/>
+  <!-- Plate -->
+  <circle cx="256" cy="272" r="160" fill="none" stroke="#1d1a14" stroke-width="16"/>
+  <circle cx="256" cy="272" r="120" fill="none" stroke="#1d1a14" stroke-width="6"/>
+  <!-- Fork on left -->
+  <line x1="148" y1="80" x2="148" y2="200" stroke="#1d1a14" stroke-width="12" stroke-linecap="round"/>
+  <line x1="132" y1="80" x2="132" y2="140" stroke="#1d1a14" stroke-width="8" stroke-linecap="round"/>
+  <line x1="148" y1="80" x2="148" y2="140" stroke="#1d1a14" stroke-width="8" stroke-linecap="round"/>
+  <line x1="164" y1="80" x2="164" y2="140" stroke="#1d1a14" stroke-width="8" stroke-linecap="round"/>
+  <!-- Knife on right -->
+  <line x1="364" y1="80" x2="364" y2="200" stroke="#1d1a14" stroke-width="12" stroke-linecap="round"/>
+  <path d="M364 80 Q390 110 364 150" fill="#1d1a14"/>
+  <!-- Letter W accent -->
+  <text x="256" y="295" font-family="Georgia, serif" font-size="80" font-weight="900" font-style="italic" text-anchor="middle" fill="#b4391a">W</text>
+</svg>

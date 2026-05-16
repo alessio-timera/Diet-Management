@@ -1,0 +1,26 @@
+{
+  "id": "b_eggs_toast",
+  "name": "Scrambled eggs on toast",
+  "type": "breakfast",
+  "time": "10 min",
+  "kcal": 510,
+  "protein": 32,
+  "carbs": 38,
+  "fat": 26,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Eggs", "qty": 3, "unit": "pc", "cat": "Dairy & Eggs" },
+    { "item": "Whole-grain bread", "qty": 2, "unit": "slices", "cat": "Bakery" },
+    { "item": "Butter", "qty": 10, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Cherry tomatoes", "qty": 80, "unit": "g", "cat": "Produce" },
+    { "item": "Avocado", "qty": 0.5, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Toast the bread.",
+    "Whisk eggs with salt and pepper. Melt butter in a non-stick pan over low heat.",
+    "Pour eggs in, stir gently with a spatula until just set (about 2 min).",
+    "Slice avocado, halve tomatoes, plate everything on the toast."
+  ],
+  "tags": []
+}

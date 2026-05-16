@@ -1,0 +1,27 @@
+{
+  "id": "d_chicken_potatoes",
+  "name": "Roast chicken thighs & potatoes",
+  "type": "dinner",
+  "time": "35 min (mostly oven)",
+  "kcal": 740,
+  "protein": 50,
+  "carbs": 65,
+  "fat": 28,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chicken thighs (boneless, skinless)", "qty": 220, "unit": "g", "cat": "Protein" },
+    { "item": "Potatoes", "qty": 300, "unit": "g", "cat": "Produce" },
+    { "item": "Green beans", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 3, "unit": "cloves", "cat": "Produce" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Heat oven to 220°C (425°F).",
+    "Cut potatoes into 2cm chunks. Toss with oil, salt, smashed garlic on a tray.",
+    "Roast 15 min. Add seasoned chicken thighs to tray, roast 18 more min.",
+    "Steam green beans 4 min. Plate with lemon squeeze."
+  ],
+  "tags": []
+}

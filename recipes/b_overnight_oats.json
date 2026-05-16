@@ -1,0 +1,26 @@
+{
+  "id": "b_overnight_oats",
+  "name": "Overnight protein oats",
+  "type": "breakfast",
+  "time": "5 min (night before)",
+  "kcal": 550,
+  "protein": 40,
+  "carbs": 75,
+  "fat": 12,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Rolled oats", "qty": 70, "unit": "g", "cat": "Pantry" },
+    { "item": "Milk", "qty": 250, "unit": "ml", "cat": "Dairy & Eggs" },
+    { "item": "Greek yogurt (0-2% fat)", "qty": 100, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Peanut butter", "qty": 20, "unit": "g", "cat": "Pantry" },
+    { "item": "Banana", "qty": 1, "unit": "pc", "cat": "Produce" },
+    { "item": "Honey", "qty": 10, "unit": "g", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Night before: combine oats, milk, yogurt, peanut butter, honey in a jar.",
+    "Stir well, cover, refrigerate overnight.",
+    "In the morning: top with sliced banana and eat cold."
+  ],
+  "tags": []
+}

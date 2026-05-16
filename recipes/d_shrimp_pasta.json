@@ -1,0 +1,28 @@
+{
+  "id": "d_shrimp_pasta",
+  "name": "Garlic shrimp pasta",
+  "type": "dinner",
+  "time": "20 min",
+  "kcal": 700,
+  "protein": 45,
+  "carbs": 80,
+  "fat": 18,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Shrimp (peeled, deveined)", "qty": 180, "unit": "g", "cat": "Protein" },
+    { "item": "Whole-wheat pasta", "qty": 100, "unit": "g", "cat": "Pantry" },
+    { "item": "Cherry tomatoes", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Garlic", "qty": 3, "unit": "cloves", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Parsley (fresh)", "qty": 10, "unit": "g", "cat": "Produce" }
+  ],
+  "steps": [
+    "Boil pasta in salted water.",
+    "Heat oil, add sliced garlic and halved tomatoes. Cook 4 min.",
+    "Add shrimp, cook 2-3 min per side until pink.",
+    "Toss with drained pasta, lemon juice, chopped parsley."
+  ],
+  "tags": []
+}

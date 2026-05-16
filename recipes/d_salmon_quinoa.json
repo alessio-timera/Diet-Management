@@ -1,0 +1,27 @@
+{
+  "id": "d_salmon_quinoa",
+  "name": "Baked salmon with quinoa",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 710,
+  "protein": 46,
+  "carbs": 65,
+  "fat": 26,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Salmon fillet", "qty": 180, "unit": "g", "cat": "Protein" },
+    { "item": "Quinoa", "qty": 80, "unit": "g", "cat": "Pantry" },
+    { "item": "Asparagus", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" }
+  ],
+  "steps": [
+    "Heat oven to 200°C. Rinse quinoa, cook 1:2 with water, ~15 min.",
+    "Place salmon and asparagus on lined tray. Drizzle oil, garlic, lemon, salt, pepper.",
+    "Bake 12-14 min until salmon flakes.",
+    "Plate quinoa, salmon, asparagus. Extra lemon on top."
+  ],
+  "tags": []
+}

@@ -1,0 +1,25 @@
+{
+  "id": "b_cottage_toast",
+  "name": "Cottage cheese & honey toast",
+  "type": "breakfast",
+  "time": "5 min",
+  "kcal": 480,
+  "protein": 35,
+  "carbs": 55,
+  "fat": 12,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Cottage cheese", "qty": 200, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Whole-grain bread", "qty": 2, "unit": "slices", "cat": "Bakery" },
+    { "item": "Honey", "qty": 15, "unit": "g", "cat": "Pantry" },
+    { "item": "Mixed nuts (almonds/walnuts)", "qty": 20, "unit": "g", "cat": "Pantry" },
+    { "item": "Banana", "qty": 1, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Toast the bread.",
+    "Spread cottage cheese generously on toast.",
+    "Drizzle honey, top with chopped nuts and banana slices."
+  ],
+  "tags": []
+}

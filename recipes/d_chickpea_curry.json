@@ -1,0 +1,29 @@
+{
+  "id": "d_chickpea_curry",
+  "name": "Chickpea & spinach curry",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 680,
+  "protein": 32,
+  "carbs": 95,
+  "fat": 18,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chickpeas (canned)", "qty": 240, "unit": "g", "cat": "Pantry" },
+    { "item": "Spinach (fresh)", "qty": 150, "unit": "g", "cat": "Produce" },
+    { "item": "Canned coconut milk (light)", "qty": 200, "unit": "ml", "cat": "Pantry" },
+    { "item": "Basmati or long-grain rice", "qty": 80, "unit": "g", "cat": "Pantry" },
+    { "item": "Onion", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Curry powder", "qty": 1, "unit": "tbsp", "cat": "Pantry" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Cook rice per package.",
+    "Sauté diced onion, garlic in oil, 4 min. Add curry powder, toast 30 sec.",
+    "Add drained chickpeas, coconut milk, simmer 8 min.",
+    "Stir in spinach until wilted, 2 min. Season, serve over rice."
+  ],
+  "tags": []
+}

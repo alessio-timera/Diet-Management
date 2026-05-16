@@ -1,0 +1,27 @@
+{
+  "id": "l_salmon_couscous",
+  "name": "Salmon & lemon couscous",
+  "type": "lunch",
+  "time": "15 min",
+  "kcal": 720,
+  "protein": 46,
+  "carbs": 70,
+  "fat": 24,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Salmon fillet", "qty": 180, "unit": "g", "cat": "Protein" },
+    { "item": "Couscous", "qty": 80, "unit": "g", "cat": "Pantry" },
+    { "item": "Zucchini", "qty": 1, "unit": "pc", "cat": "Produce" },
+    { "item": "Lemon", "qty": 0.5, "unit": "pc", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 1, "unit": "cloves", "cat": "Produce" }
+  ],
+  "steps": [
+    "Pour boiling water (1:1) over couscous, cover 5 min, fluff with fork.",
+    "Season salmon with salt, pepper. Cook skin-side down in oiled pan, 4 min.",
+    "Flip, add sliced zucchini and garlic, cook 3 more min.",
+    "Squeeze lemon over everything, plate."
+  ],
+  "tags": []
+}

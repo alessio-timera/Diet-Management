@@ -1,0 +1,28 @@
+{
+  "id": "l_egg_fried_rice",
+  "name": "Egg & veggie fried rice",
+  "type": "lunch",
+  "time": "15 min",
+  "kcal": 660,
+  "protein": 38,
+  "carbs": 80,
+  "fat": 18,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Eggs", "qty": 3, "unit": "pc", "cat": "Dairy & Eggs" },
+    { "item": "Basmati or long-grain rice", "qty": 100, "unit": "g", "cat": "Pantry" },
+    { "item": "Frozen peas & corn mix", "qty": 100, "unit": "g", "cat": "Frozen" },
+    { "item": "Soy sauce", "qty": 15, "unit": "ml", "cat": "Pantry" },
+    { "item": "Garlic", "qty": 2, "unit": "cloves", "cat": "Produce" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" },
+    { "item": "Spring onion", "qty": 1, "unit": "pc", "cat": "Produce" }
+  ],
+  "steps": [
+    "Cook rice ahead (or use leftover). Cool slightly.",
+    "Scramble eggs in oiled wok/pan, set aside.",
+    "Add more oil, garlic, frozen veg. Toss 3 min.",
+    "Add rice, soy sauce, eggs. Toss high heat 2 min. Top with sliced spring onion."
+  ],
+  "tags": []
+}
