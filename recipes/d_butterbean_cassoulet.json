@@ -1,0 +1,37 @@
+{
+  "id": "d_butter_bean_cassoulet",
+  "name": "Butter Bean Cassoulet",
+  "type": "dinner",
+  "time": "30 min",
+  "kcal": 566,
+  "protein": 21,
+  "carbs": 70,
+  "fat": 21,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Garlic", "qty": 1, "unit": "cloves", "cat": "Produce" },
+    { "item": "Green beans", "qty": 75, "unit": "g", "cat": "Produce" },
+    { "item": "Butter beans (canned)", "qty": 0.5, "unit": "pc", "cat": "Pantry" },
+    { "item": "Tomato puree", "qty": 15, "unit": "g", "cat": "Pantry" },
+    { "item": "Red wine stock paste", "qty": 14, "unit": "g", "cat": "Pantry" },
+    { "item": "Mixed dried herbs", "qty": 0.5, "unit": "tsp", "cat": "Pantry" },
+    { "item": "Baby plum tomatoes", "qty": 62, "unit": "g", "cat": "Produce" },
+    { "item": "Ciabatta roll", "qty": 1, "unit": "pc", "cat": "Bakery" },
+    { "item": "Grated hard Italian-style cheese", "qty": 10, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Pesto", "qty": 16, "unit": "g", "cat": "Pantry" },
+    { "item": "Sugar", "qty": 0.5, "unit": "tsp", "cat": "Pantry" },
+    { "item": "Butter", "qty": 10, "unit": "g", "cat": "Dairy & Eggs" },
+    { "item": "Olive oil", "qty": 10, "unit": "ml", "cat": "Pantry" }
+  ],
+  "steps": [
+    "Peel and grate the garlic. Trim and halve the green beans. Drain and rinse the butter beans in a sieve.",
+    "Heat a drizzle of oil in a large saucepan on medium heat. Once hot, add the garlic and tomato puree and cook for 1 min.",
+    "Add the red wine stock paste, mixed herbs, sugar, and 125 ml water for the sauce to the pan. Stir to combine.",
+    "Bring the sauce to the boil, then stir through the butter beans, green beans, and baby plum tomatoes. Lower the heat and simmer until slightly reduced and the tomatoes have softened, 15-17 min.",
+    "Meanwhile, halve the ciabatta. When the cassoulet has 5 min remaining, toast the ciabatta halves until golden, drizzle with oil, season with salt, then cut diagonally into triangles.",
+    "Stir the butter through the cassoulet until melted. Add a splash of water if it's a little too thick. Taste and season with salt and pepper if needed.",
+    "Share the cassoulet between bowls. Sprinkle over the grated hard Italian-style cheese and drizzle over the pesto. Serve the ciabatta alongside."
+  ],
+  "tags": ["veggie", "one-pot", "hellofresh"]
+}
