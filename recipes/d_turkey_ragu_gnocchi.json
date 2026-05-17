@@ -1,0 +1,32 @@
+{
+  "id": "d_turkey_ragu_gnocchi",
+  "name": "Turkey Tomato Ragu with Gnocchi",
+  "type": "dinner",
+  "time": "20 min",
+  "kcal": 548,
+  "protein": 42,
+  "carbs": 52,
+  "fat": 16,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Turkey mince",        "qty": 200, "unit": "g",     "cat": "Protein"      },
+    { "item": "Fresh gnocchi",       "qty": 200, "unit": "g",     "cat": "Pantry"       },
+    { "item": "Passata",             "qty": 150, "unit": "ml",    "cat": "Pantry"       },
+    { "item": "Onion",               "qty": 1,   "unit": "pc",    "cat": "Produce"      },
+    { "item": "Garlic",              "qty": 2,   "unit": "cloves","cat": "Produce"      },
+    { "item": "Tomato paste",        "qty": 1,   "unit": "tbsp",  "cat": "Pantry"       },
+    { "item": "Olive oil",           "qty": 15,  "unit": "ml",    "cat": "Pantry"       },
+    { "item": "Mixed Italian herbs", "qty": 1,   "unit": "tsp",   "cat": "Pantry"       },
+    { "item": "Baby spinach",        "qty": 40,  "unit": "g",     "cat": "Produce"      }
+  ],
+  "steps": [
+    "Dice the onion and mince the garlic.",
+    "Heat oil in a wide pan over high heat. Add turkey mince and cook for 4–5 min, breaking it up until browned.",
+    "Add onion and garlic, cook 2 min until softened.",
+    "Stir in tomato paste and herbs, pour in passata. Simmer for 5 min.",
+    "Cook gnocchi in boiling salted water for 2 min until they float. Drain.",
+    "Stir spinach through the ragu until wilted. Add gnocchi and toss to coat."
+  ],
+  "tags": []
+}

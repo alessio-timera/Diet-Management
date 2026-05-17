@@ -1,0 +1,33 @@
+{
+  "id": "d_pork_sweet_sour",
+  "name": "Speedy Pork Sweet & Sour with Pineapple",
+  "type": "dinner",
+  "time": "20 min",
+  "kcal": 536,
+  "protein": 42,
+  "carbs": 58,
+  "fat": 12,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Pork tenderloin",   "qty": 200, "unit": "g",     "cat": "Protein" },
+    { "item": "Pineapple chunks",  "qty": 100, "unit": "g",     "cat": "Produce" },
+    { "item": "Red bell pepper",   "qty": 1,   "unit": "pc",    "cat": "Produce" },
+    { "item": "Jasmine rice",      "qty": 80,  "unit": "g",     "cat": "Pantry"  },
+    { "item": "Soy sauce",         "qty": 2,   "unit": "tbsp",  "cat": "Pantry"  },
+    { "item": "Rice vinegar",      "qty": 1,   "unit": "tbsp",  "cat": "Pantry"  },
+    { "item": "Tomato paste",      "qty": 1,   "unit": "tbsp",  "cat": "Pantry"  },
+    { "item": "Honey",             "qty": 1,   "unit": "tbsp",  "cat": "Pantry"  },
+    { "item": "Garlic",            "qty": 2,   "unit": "cloves","cat": "Produce" },
+    { "item": "Sesame oil",        "qty": 1,   "unit": "tsp",   "cat": "Pantry"  }
+  ],
+  "steps": [
+    "Cook rice according to pack instructions.",
+    "Slice pork into thin strips. Dice pepper. Mince garlic.",
+    "Mix soy sauce, vinegar, tomato paste, honey and 2 tbsp water into a sauce.",
+    "Heat a wok over high heat with a little oil. Stir-fry pork 3–4 min until cooked through. Set aside.",
+    "Add pepper and garlic to the wok, stir-fry 2 min. Add pineapple and toss.",
+    "Return pork, pour over the sauce and stir-fry 1–2 min until glazed. Finish with sesame oil. Serve over rice."
+  ],
+  "tags": []
+}

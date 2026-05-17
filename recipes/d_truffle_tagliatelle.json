@@ -1,0 +1,28 @@
+{
+  "id": "d_truffle_tagliatelle",
+  "name": "Truffle Tagliatelle with Parmigiano",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 610,
+  "protein": 22,
+  "carbs": 74,
+  "fat": 24,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Dry tagliatelle",        "qty": 100, "unit": "g",  "cat": "Pantry"       },
+    { "item": "Butter",                 "qty": 40,  "unit": "g",  "cat": "Dairy & Eggs" },
+    { "item": "Black truffle",          "qty": 15,  "unit": "g",  "cat": "Produce"      },
+    { "item": "Parmigiano Reggiano",    "qty": 40,  "unit": "g",  "cat": "Dairy & Eggs" },
+    { "item": "Sea salt",               "qty": 1,   "unit": "tsp","cat": "Pantry"       }
+  ],
+  "steps": [
+    "Bring a large pot of salted water to a boil. Cook tagliatelle until 1 min before al dente. Reserve a cup of pasta water before draining.",
+    "While pasta cooks, melt butter in a wide pan over very low heat — do not let it brown.",
+    "Shave half the truffle directly into the butter and warm for 1 min off the heat to infuse.",
+    "Add drained pasta to the pan with 3–4 tbsp of pasta water. Toss vigorously over low heat until a glossy sauce forms.",
+    "Remove from heat, add half the grated Parmigiano and toss again, adding more pasta water if needed.",
+    "Plate immediately and finish with remaining Parmigiano and freshly shaved truffle."
+  ],
+  "tags": []
+}

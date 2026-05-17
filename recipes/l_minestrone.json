@@ -1,0 +1,37 @@
+{
+  "id": "l_minestrone",
+  "name": "Authentic Italian Minestrone",
+  "type": "lunch",
+  "time": "45 min",
+  "kcal": 370,
+  "protein": 14,
+  "carbs": 48,
+  "fat": 14,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Olive oil",          "qty": 15,  "unit": "ml",    "cat": "Pantry"       },
+    { "item": "Onion",              "qty": 1,   "unit": "pc",    "cat": "Produce"      },
+    { "item": "Carrot",             "qty": 1,   "unit": "pc",    "cat": "Produce"      },
+    { "item": "Celery",             "qty": 1,   "unit": "pc",    "cat": "Produce"      },
+    { "item": "Canned whole tomatoes","qty": 100,"unit": "g",    "cat": "Pantry"       },
+    { "item": "Potato",             "qty": 1,   "unit": "pc",    "cat": "Produce"      },
+    { "item": "Broccoli",           "qty": 80,  "unit": "g",     "cat": "Produce"      },
+    { "item": "Cauliflower",        "qty": 80,  "unit": "g",     "cat": "Produce"      },
+    { "item": "Savoy cabbage",      "qty": 60,  "unit": "g",     "cat": "Produce"      },
+    { "item": "Cannellini beans",   "qty": 100, "unit": "g",     "cat": "Pantry"       },
+    { "item": "Vegetable stock",    "qty": 500, "unit": "ml",    "cat": "Pantry"       },
+    { "item": "Rosemary",           "qty": 1,   "unit": "tsp",   "cat": "Pantry"       },
+    { "item": "Parmesan",           "qty": 15,  "unit": "g",     "cat": "Dairy & Eggs" }
+  ],
+  "steps": [
+    "Dice onion, carrot and celery. Peel and cube the potato. Break broccoli and cauliflower into florets. Shred the cabbage.",
+    "Heat olive oil in a large pot over medium heat. Sauté onion, carrot, celery and rosemary for 5 min until softened.",
+    "Add tomatoes and crush them roughly with a spoon. Cook 3 min.",
+    "Add potato, broccoli, cauliflower and cabbage. Pour in stock and bring to a boil.",
+    "Reduce heat and simmer 20–25 min until all vegetables are tender.",
+    "Stir in cannellini beans and cook a further 10 min. Season well.",
+    "Ladle into a bowl and finish with grated parmesan and a drizzle of olive oil."
+  ],
+  "tags": []
+}

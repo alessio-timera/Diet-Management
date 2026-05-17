@@ -1,0 +1,32 @@
+{
+  "id": "d_white_bean_steak",
+  "name": "Sirloin Steak with White Bean, Mushroom & Cavolo Nero",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 565,
+  "protein": 50,
+  "carbs": 22,
+  "fat": 28,
+  "pescatarian": false,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Sirloin steak",      "qty": 200, "unit": "g",     "cat": "Protein"      },
+    { "item": "Cannellini beans",   "qty": 200, "unit": "g",     "cat": "Pantry"       },
+    { "item": "Chestnut mushrooms", "qty": 120, "unit": "g",     "cat": "Produce"      },
+    { "item": "Cavolo nero",        "qty": 80,  "unit": "g",     "cat": "Produce"      },
+    { "item": "Sauerkraut",         "qty": 60,  "unit": "g",     "cat": "Pantry"       },
+    { "item": "Garlic",             "qty": 2,   "unit": "cloves","cat": "Produce"      },
+    { "item": "Olive oil",          "qty": 15,  "unit": "ml",    "cat": "Pantry"       },
+    { "item": "Butter",             "qty": 10,  "unit": "g",     "cat": "Dairy & Eggs" },
+    { "item": "Dijon mustard",      "qty": 1,   "unit": "tsp",   "cat": "Pantry"       }
+  ],
+  "steps": [
+    "Bring the steak to room temperature and season generously with salt and pepper.",
+    "Slice mushrooms and cavolo nero. Mince garlic.",
+    "Heat a dry cast-iron pan until very hot. Sear steak 2–3 min per side for medium-rare. Add butter in the last minute and baste. Rest 5 min.",
+    "In the same pan, cook garlic and mushrooms in the steak juices for 3 min.",
+    "Add cavolo nero and beans, cook 3–4 min until the greens wilt.",
+    "Stir in Dijon mustard. Slice the rested steak and serve over the beans, topped with sauerkraut."
+  ],
+  "tags": []
+}

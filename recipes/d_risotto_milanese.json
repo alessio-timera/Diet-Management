@@ -1,0 +1,32 @@
+{
+  "id": "d_risotto_milanese",
+  "name": "Risotto alla Milanese",
+  "type": "dinner",
+  "time": "35 min",
+  "kcal": 770,
+  "protein": 19,
+  "carbs": 108,
+  "fat": 23,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Arborio rice",        "qty": 125, "unit": "g",    "cat": "Pantry"       },
+    { "item": "Vegetable stock",     "qty": 500, "unit": "ml",   "cat": "Pantry"       },
+    { "item": "Dry white wine",      "qty": 75,  "unit": "ml",   "cat": "Pantry"       },
+    { "item": "Butter",              "qty": 20,  "unit": "g",    "cat": "Dairy & Eggs" },
+    { "item": "Parmigiano Reggiano", "qty": 25,  "unit": "g",    "cat": "Dairy & Eggs" },
+    { "item": "Onion",               "qty": 1,   "unit": "pc",   "cat": "Produce"      },
+    { "item": "Saffron",             "qty": 1,   "unit": "tsp",  "cat": "Pantry"       },
+    { "item": "Coarse salt",         "qty": 1,   "unit": "tsp",  "cat": "Pantry"       }
+  ],
+  "steps": [
+    "Bring 500ml water to a boil, dissolve the stock cube and keep the broth warm on low heat throughout cooking.",
+    "Melt butter gently in a heavy-bottomed pot over low heat. Add finely diced onion and cook on the lowest setting for 10 min, stirring occasionally, until very soft and translucent — do not let it brown.",
+    "Raise heat to maximum. Add the rice and stir vigorously for 2 min until the grains toast and turn slightly darker.",
+    "Pour in the white wine and stir until the alcohol smell disappears and the liquid is fully absorbed, about 1–2 min.",
+    "Add the first ladle of hot broth and stir in the saffron. Rinse any saffron residue off the ladle into the pot. Stir until absorbed.",
+    "Continue adding broth one ladle at a time over 15 min — add the next only once the previous is absorbed. Stir regularly and keep at a gentle simmer.",
+    "When the rice is al dente and the risotto flows slowly off the spoon, remove from heat. Fold in grated Parmigiano, rest 1 min and serve immediately."
+  ],
+  "tags": []
+}

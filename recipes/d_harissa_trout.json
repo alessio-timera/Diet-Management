@@ -1,0 +1,32 @@
+{
+  "id": "d_harissa_trout",
+  "name": "Honey Harissa Trout with Chickpeas & Lime Yoghurt",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 530,
+  "protein": 46,
+  "carbs": 28,
+  "fat": 22,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Trout fillet",   "qty": 180, "unit": "g",     "cat": "Protein"      },
+    { "item": "Chickpeas",      "qty": 200, "unit": "g",     "cat": "Pantry"       },
+    { "item": "Harissa paste",  "qty": 2,   "unit": "tbsp",  "cat": "Pantry"       },
+    { "item": "Honey",          "qty": 1,   "unit": "tbsp",  "cat": "Pantry"       },
+    { "item": "Greek yoghurt",  "qty": 80,  "unit": "g",     "cat": "Dairy & Eggs" },
+    { "item": "Lime",           "qty": 1,   "unit": "pc",    "cat": "Produce"      },
+    { "item": "Garlic",         "qty": 1,   "unit": "cloves","cat": "Produce"      },
+    { "item": "Olive oil",      "qty": 15,  "unit": "ml",    "cat": "Pantry"       },
+    { "item": "Baby spinach",   "qty": 50,  "unit": "g",     "cat": "Produce"      }
+  ],
+  "steps": [
+    "Mix harissa and honey together. Rub half over the trout fillet and season well.",
+    "Heat oil in a pan over medium-high heat. Fry chickpeas with garlic and remaining harissa mix for 4 min until slightly crispy.",
+    "Push chickpeas to the side. Add trout skin-side down and cook 3–4 min, flip and cook 1–2 min more. Remove and rest.",
+    "Stir spinach through the chickpeas until wilted.",
+    "Mix yoghurt with lime zest, lime juice and a pinch of salt.",
+    "Serve trout over chickpeas with a generous dollop of lime yoghurt."
+  ],
+  "tags": []
+}

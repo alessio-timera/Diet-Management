@@ -1,0 +1,33 @@
+{
+  "id": "d_curried_chickpea_carrot",
+  "name": "Curried Chickpeas with Honey Glazed Carrots & Pickled Radish",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 420,
+  "protein": 15,
+  "carbs": 60,
+  "fat": 12,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chickpeas",           "qty": 240, "unit": "g",    "cat": "Pantry"  },
+    { "item": "Carrots",             "qty": 200, "unit": "g",    "cat": "Produce" },
+    { "item": "Radishes",            "qty": 80,  "unit": "g",    "cat": "Produce" },
+    { "item": "Red onion",           "qty": 1,   "unit": "pc",   "cat": "Produce" },
+    { "item": "Curry powder",        "qty": 2,   "unit": "tsp",  "cat": "Pantry"  },
+    { "item": "Honey",               "qty": 1,   "unit": "tbsp", "cat": "Pantry"  },
+    { "item": "Apple cider vinegar", "qty": 2,   "unit": "tbsp", "cat": "Pantry"  },
+    { "item": "Coconut milk",        "qty": 100, "unit": "ml",   "cat": "Pantry"  },
+    { "item": "Olive oil",           "qty": 15,  "unit": "ml",   "cat": "Pantry"  },
+    { "item": "Fresh coriander",     "qty": 10,  "unit": "g",    "cat": "Produce" }
+  ],
+  "steps": [
+    "Quick-pickle the radishes: slice thinly and toss with vinegar and a pinch of salt. Set aside.",
+    "Peel and cut carrots into batons. Dice the red onion.",
+    "Heat oil in a pan over medium heat. Cook onion 3 min, add curry powder and stir 1 min.",
+    "Add chickpeas and coconut milk, simmer 8 min.",
+    "Meanwhile, toss carrots with honey and a drizzle of oil. Cook in a hot pan for 10–12 min, turning, until caramelised.",
+    "Serve chickpea curry topped with honey carrots, pickled radish and fresh coriander."
+  ],
+  "tags": []
+}

@@ -1,0 +1,30 @@
+{
+  "id": "l_crostino_burrata",
+  "name": "Crostino with Roasted Tomatoes & Burrata",
+  "type": "lunch",
+  "time": "30 min",
+  "kcal": 555,
+  "protein": 18,
+  "carbs": 44,
+  "fat": 34,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Ciabatta or Italian bread", "qty": 80,  "unit": "g",     "cat": "Bakery"       },
+    { "item": "Cherry tomatoes",           "qty": 150, "unit": "g",     "cat": "Produce"      },
+    { "item": "Burrata",                   "qty": 100, "unit": "g",     "cat": "Dairy & Eggs" },
+    { "item": "Olive oil",                 "qty": 25,  "unit": "ml",    "cat": "Pantry"       },
+    { "item": "Garlic",                    "qty": 2,   "unit": "cloves","cat": "Produce"      },
+    { "item": "Fresh basil",               "qty": 10,  "unit": "g",     "cat": "Produce"      },
+    { "item": "Sea salt flakes",           "qty": 1,   "unit": "tsp",   "cat": "Pantry"       }
+  ],
+  "steps": [
+    "Heat oven to 180°C. Toss cherry tomatoes with 1 tbsp olive oil, a pinch of salt and 1 minced garlic clove in a small baking dish.",
+    "Roast tomatoes for 20–25 min until blistered and jammy.",
+    "Slice the bread and drizzle with remaining olive oil. Toast in a dry pan over medium heat 3–4 min per side until golden and crisp.",
+    "While still warm, rub the toast with the remaining whole garlic clove.",
+    "Tear burrata over the toast, spoon over the roasted tomatoes with all their juices.",
+    "Finish with fresh basil leaves and a pinch of sea salt flakes."
+  ],
+  "tags": []
+}

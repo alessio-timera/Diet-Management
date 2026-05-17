@@ -102,13 +102,9 @@
   }
 
   /* STATS BAR */
-  .stats {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    border: 2px solid var(--ink);
-    background: var(--paper-2);
-    margin: 0 0 28px;
-  }
+  .stats { border: 2px solid var(--ink); background: var(--paper-2); margin: 0 0 28px; }
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stats-row:not(:last-child) { border-bottom: 1px solid var(--ink); }
   .stat { padding: 14px 16px; border-right: 1px solid var(--ink); }
   .stat:last-child { border-right: 0; }
   .stat .label {
@@ -118,10 +114,30 @@
   }
   .stat .value { font-size: 22px; font-weight: 700; margin-top: 2px; }
   .stat .value small { font-size: 12px; font-weight: 500; color: var(--ink-soft); margin-left: 4px; }
+  .stat-name {
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'JetBrains Mono', monospace; font-size: 14px; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    cursor: pointer; user-select: none;
+  }
+  .stat-name::after { content: " ▾"; font-size: 10px; opacity: 0.5; }
+  .ale-name { color: var(--ink); }
+  .nastya-name { color: var(--accent-2); }
+  /* collapsed state: only name cell visible, spans full width */
+  body.hide-ale-targets .stats-row-ale .stat:not(.stat-name) { display: none; }
+  body.hide-ale-targets .stats-row-ale .stat-name { grid-column: 1 / -1; border-right: 0; }
+  body.hide-ale-targets .stats-row-ale .stat-name::after { content: " ▸"; }
+  body.hide-nastya-targets .stats-row-nastya .stat:not(.stat-name) { display: none; }
+  body.hide-nastya-targets .stats-row-nastya .stat-name { grid-column: 1 / -1; border-right: 0; }
+  body.hide-nastya-targets .stats-row-nastya .stat-name::after { content: " ▸"; }
+  /* hide day macro bars per person */
+  body.hide-ale-targets [data-person="ale"].day-macros-person { display: none; }
+  body.hide-nastya-targets [data-person="nastya"].day-macros-person { display: none; }
   @media (max-width: 720px) {
-    .stats { grid-template-columns: repeat(2, 1fr); }
-    .stat:nth-child(2) { border-right: 0; }
-    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--ink); }
+    .stats-row { grid-template-columns: repeat(2, 1fr); }
+    .stat:last-child { border-right: 1px solid var(--ink); }
+    .stat:nth-child(2n) { border-right: 0; }
+    .stats-row .stat:nth-child(1), .stats-row .stat:nth-child(2) { border-bottom: 1px solid var(--ink); }
   }
 
   /* SECTION HEADERS */
@@ -691,28 +707,42 @@
   <!-- PLANNER -->
   <section class="panel active" id="panel-planner">
     <div class="stats">
-      <div class="stat">
-        <div class="label">Daily Target</div>
-        <div class="value" id="stat-kcal">2,800 <small>kcal</small></div>
+      <div class="stats-row stats-row-ale">
+        <div class="stat stat-name ale-name">Ale</div>
+        <div class="stat">
+          <div class="label">Daily Target</div>
+          <div class="value" id="stat-kcal">— <small>kcal</small></div>
+        </div>
+        <div class="stat">
+          <div class="label">Protein</div>
+          <div class="value" id="stat-protein">— <small>g/day</small></div>
+        </div>
+        <div class="stat">
+          <div class="label">Carbs / Fat</div>
+          <div class="value" id="stat-carbsfat">— / — <small>g</small></div>
+        </div>
       </div>
-      <div class="stat">
-        <div class="label">Protein</div>
-        <div class="value" id="stat-protein">144 <small>g/day</small></div>
-      </div>
-      <div class="stat">
-        <div class="label">Carbs / Fat</div>
-        <div class="value" id="stat-carbsfat">— / — <small>g</small></div>
-      </div>
-      <div class="stat">
-        <div class="label">Training</div>
-        <div class="value">2-3× <small>/ week</small></div>
+      <div class="stats-row stats-row-nastya">
+        <div class="stat stat-name nastya-name">Nastya</div>
+        <div class="stat">
+          <div class="label">Daily Target</div>
+          <div class="value" id="stat-kcal-a">— <small>kcal</small></div>
+        </div>
+        <div class="stat">
+          <div class="label">Protein</div>
+          <div class="value" id="stat-protein-a">— <small>g/day</small></div>
+        </div>
+        <div class="stat">
+          <div class="label">Carbs / Fat</div>
+          <div class="value" id="stat-carbsfat-a">— / — <small>g</small></div>
+        </div>
       </div>
     </div>
 
     <div class="section-head">
       <span class="num">§ 01</span>
       <h2>Plan your week</h2>
-      <span class="meta">Choose <strong style="color:var(--ink);">Alessio</strong>, <strong style="color:var(--accent-2);">Anastasiia</strong>, or <strong style="color:var(--plum);">Both</strong> per meal</span>
+      <span class="meta">Choose <strong style="color:var(--ink);">Ale</strong>, <strong style="color:var(--accent-2);">Nastya</strong>, or <strong style="color:var(--plum);">Both</strong> per meal</span>
     </div>
 
     <div class="days" id="days"></div>
@@ -767,7 +797,7 @@
     <div class="profile-section">
       <div class="section-head">
         <span class="num">§ 01</span>
-        <h2>Alessio</h2>
+        <h2>Ale</h2>
         <span class="meta">Macros recompute automatically</span>
       </div>
       <div class="settings-form">
@@ -811,14 +841,14 @@
       </div>
       <div id="computedTargets"></div>
       <div style="margin: 4px 0 0;">
-        <button class="btn" id="saveProfileBtn">Save Alessio</button>
+        <button class="btn" id="saveProfileBtn">Save Ale</button>
       </div>
     </div>
 
     <div class="profile-section">
       <div class="section-head">
         <span class="num">§ 02</span>
-        <h2>Anastasiia</h2>
+        <h2>Nastya</h2>
         <span class="meta">Pescatarian · macros recompute automatically</span>
       </div>
       <div class="settings-form">
@@ -862,7 +892,7 @@
       </div>
       <div id="computedTargetsA"></div>
       <div style="margin: 4px 0 0;">
-        <button class="btn" id="saveProfileBtnA">Save Anastasiia</button>
+        <button class="btn" id="saveProfileBtnA">Save Nastya</button>
       </div>
     </div>
 
@@ -913,8 +943,8 @@
    PROFILE & TARGETS
    =========================================================== */
 const DEFAULT_PROFILE = {
-  weight_kg: 80,
-  height_cm: 178,
+  weight_kg: 78,
+  height_cm: 180,
   age: 30,
   sex: "male",
   goal: "muscle_gain",
@@ -922,8 +952,8 @@ const DEFAULT_PROFILE = {
 };
 
 const DEFAULT_PROFILE_A = {
-  weight_kg: 60,
-  height_cm: 165,
+  weight_kg: 59,
+  height_cm: 173,
   age: 28,
   sex: "female",
   goal: "maintenance",
@@ -1077,7 +1107,12 @@ function getDishesByType(whom) {
   const pescOnly = whom === "both" || whom === "anastasiia";
   for (const [id, d] of Object.entries(DISHES)) {
     if (pescOnly && !d.pescatarian) continue;
-    by[d.type].push({ id, ...d });
+    if (d.type === "lunch" || d.type === "dinner") {
+      by.lunch.push({ id, ...d });
+      by.dinner.push({ id, ...d });
+    } else {
+      by[d.type].push({ id, ...d });
+    }
   }
   for (const t of Object.keys(by)) {
     by[t].sort((a, b) => {
@@ -1137,8 +1172,8 @@ function renderMealsForDay(day) {
           <button class="skip-btn" data-day="${day}" data-meal="${m.key}">eating out</button>
         </div>
         <div class="whom-toggle">
-          <button class="whom-btn ${whom === "alessio" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="alessio">Alessio</button>
-          <button class="whom-btn ${whom === "anastasiia" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="anastasiia">Anastasiia</button>
+          <button class="whom-btn ${whom === "alessio" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="alessio">Ale</button>
+          <button class="whom-btn ${whom === "anastasiia" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="anastasiia">Nastya</button>
           <button class="whom-btn both ${whom === "both" ? "active" : ""}" data-day="${day}" data-meal="${m.key}" data-whom="both">Both</button>
         </div>
         <select class="dish" data-day="${day}" data-meal="${m.key}">${dishOptions}</select>
@@ -1244,8 +1279,8 @@ function renderDayMacros(day) {
   let html = `<div class="day-prep-time">Prep: ${prepLabel}</div>`;
   if (hasA) {
     html += `
-      <div class="day-macros-person">
-        <div class="person-label">Alessio</div>
+      <div class="day-macros-person" data-person="ale">
+        <div class="person-label">Ale</div>
         <div class="day-macros">
           ${macroBar("Calories", aKcal,    TARGETS.kcal,    "kcal", "kcal")}
           ${macroBar("Protein",  aProtein, TARGETS.protein, "g",    "protein")}
@@ -1256,8 +1291,8 @@ function renderDayMacros(day) {
   }
   if (hasN) {
     html += `
-      <div class="day-macros-person">
-        <div class="person-label">Anastasiia</div>
+      <div class="day-macros-person" data-person="nastya">
+        <div class="person-label">Nastya</div>
         <div class="day-macros">
           ${macroBar("Calories", nKcal,    TARGETS_A.kcal,    "kcal", "kcal")}
           ${macroBar("Protein",  nProtein, TARGETS_A.protein, "g",    "protein")}
@@ -1531,6 +1566,17 @@ function renderComputedTargetsA() {
   document.getElementById(id).addEventListener("input", renderComputedTargetsA);
 });
 
+/* targets visibility toggles */
+document.body.classList.add("hide-nastya-targets");
+document.querySelectorAll(".stat-name").forEach(btn => {
+  btn.addEventListener("click", () => {
+    const cls = btn.closest(".stats-row").classList.contains("stats-row-ale")
+      ? "hide-ale-targets"
+      : "hide-nastya-targets";
+    document.body.classList.toggle(cls);
+  });
+});
+
 document.getElementById("saveProfileBtn").addEventListener("click", () => {
   const w = parseFloat(document.getElementById("s-weight").value);
   const h = parseFloat(document.getElementById("s-height").value);
@@ -1552,7 +1598,7 @@ document.getElementById("saveProfileBtn").addEventListener("click", () => {
   try { localStorage.setItem(STORAGE_KEYS.profile, JSON.stringify(userProfile)); } catch (e) {}
   updateStatsDisplay();
   buildDays();
-  showToast("Alessio's profile saved");
+  showToast("Ale's profile saved");
 });
 
 document.getElementById("saveProfileBtnA").addEventListener("click", () => {
@@ -1574,17 +1620,24 @@ document.getElementById("saveProfileBtnA").addEventListener("click", () => {
   };
   TARGETS_A = computeTargets(userProfileA);
   try { localStorage.setItem(STORAGE_KEYS.profileA, JSON.stringify(userProfileA)); } catch (e) {}
+  updateStatsDisplay();
   buildDays();
-  showToast("Anastasiia's profile saved");
+  showToast("Nastya's profile saved");
 });
 
 function updateStatsDisplay() {
-  const kcalEl     = document.getElementById("stat-kcal");
-  const proteinEl  = document.getElementById("stat-protein");
-  const carbsfatEl = document.getElementById("stat-carbsfat");
-  if (kcalEl)     kcalEl.innerHTML     = `${TARGETS.kcal.toLocaleString()} <small>kcal</small>`;
-  if (proteinEl)  proteinEl.innerHTML  = `${TARGETS.protein} <small>g/day</small>`;
-  if (carbsfatEl) carbsfatEl.innerHTML = `${TARGETS.carbs} / ${TARGETS.fat} <small>g</small>`;
+  const kcalEl      = document.getElementById("stat-kcal");
+  const proteinEl   = document.getElementById("stat-protein");
+  const carbsfatEl  = document.getElementById("stat-carbsfat");
+  const kcalElA     = document.getElementById("stat-kcal-a");
+  const proteinElA  = document.getElementById("stat-protein-a");
+  const carbsfatElA = document.getElementById("stat-carbsfat-a");
+  if (kcalEl)      kcalEl.innerHTML      = `${TARGETS.kcal.toLocaleString()} <small>kcal</small>`;
+  if (proteinEl)   proteinEl.innerHTML   = `${TARGETS.protein} <small>g/day</small>`;
+  if (carbsfatEl)  carbsfatEl.innerHTML  = `${TARGETS.carbs} / ${TARGETS.fat} <small>g</small>`;
+  if (kcalElA)     kcalElA.innerHTML     = `${TARGETS_A.kcal.toLocaleString()} <small>kcal</small>`;
+  if (proteinElA)  proteinElA.innerHTML  = `${TARGETS_A.protein} <small>g/day</small>`;
+  if (carbsfatElA) carbsfatElA.innerHTML = `${TARGETS_A.carbs} / ${TARGETS_A.fat} <small>g</small>`;
 }
 
 /* ===========================================================

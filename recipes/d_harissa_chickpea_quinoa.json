@@ -1,0 +1,32 @@
+{
+  "id": "d_harissa_chickpea_quinoa",
+  "name": "Harissa Chickpeas with Quinoa, Courgette & Lemon Tahini",
+  "type": "dinner",
+  "time": "20 min",
+  "kcal": 553,
+  "protein": 22,
+  "carbs": 60,
+  "fat": 22,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Chickpeas",       "qty": 200, "unit": "g",     "cat": "Pantry"  },
+    { "item": "Quinoa",          "qty": 80,  "unit": "g",     "cat": "Pantry"  },
+    { "item": "Courgette",       "qty": 1,   "unit": "pc",    "cat": "Produce" },
+    { "item": "Harissa paste",   "qty": 2,   "unit": "tbsp",  "cat": "Pantry"  },
+    { "item": "Tahini",          "qty": 2,   "unit": "tbsp",  "cat": "Pantry"  },
+    { "item": "Lemon",           "qty": 1,   "unit": "pc",    "cat": "Produce" },
+    { "item": "Garlic",          "qty": 1,   "unit": "cloves","cat": "Produce" },
+    { "item": "Olive oil",       "qty": 15,  "unit": "ml",    "cat": "Pantry"  },
+    { "item": "Fresh coriander", "qty": 10,  "unit": "g",     "cat": "Produce" }
+  ],
+  "steps": [
+    "Cook quinoa in 160ml salted water for 12 min. Remove from heat and rest 2 min with the lid on.",
+    "Halve courgette lengthways and slice into half-moons. Mince garlic.",
+    "Heat a griddle or frying pan until very hot. Char courgette 2–3 min per side. Set aside.",
+    "In the same pan, heat oil and fry chickpeas with harissa and garlic for 4–5 min until slightly crispy.",
+    "Whisk tahini with lemon juice, 2 tbsp water and a pinch of salt until smooth.",
+    "Serve quinoa topped with harissa chickpeas, charred courgette, a drizzle of lemon tahini and fresh coriander."
+  ],
+  "tags": []
+}

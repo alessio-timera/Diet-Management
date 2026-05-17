@@ -1,0 +1,33 @@
+{
+  "id": "d_mushroom_beanotto",
+  "name": "Porcini Mushroom Beanotto with Pine Nuts",
+  "type": "dinner",
+  "time": "20 min",
+  "kcal": 420,
+  "protein": 18,
+  "carbs": 48,
+  "fat": 16,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Cannellini beans",        "qty": 240, "unit": "g",     "cat": "Pantry"      },
+    { "item": "Dried porcini mushrooms", "qty": 15,  "unit": "g",     "cat": "Pantry"      },
+    { "item": "Chestnut mushrooms",      "qty": 150, "unit": "g",     "cat": "Produce"     },
+    { "item": "Vegetable stock",         "qty": 300, "unit": "ml",    "cat": "Pantry"      },
+    { "item": "Onion",                   "qty": 1,   "unit": "pc",    "cat": "Produce"     },
+    { "item": "Garlic",                  "qty": 2,   "unit": "cloves","cat": "Produce"     },
+    { "item": "Pine nuts",               "qty": 20,  "unit": "g",     "cat": "Pantry"      },
+    { "item": "Parmesan",                "qty": 20,  "unit": "g",     "cat": "Dairy & Eggs"},
+    { "item": "Olive oil",               "qty": 15,  "unit": "ml",    "cat": "Pantry"      },
+    { "item": "Fresh parsley",           "qty": 10,  "unit": "g",     "cat": "Produce"     }
+  ],
+  "steps": [
+    "Soak dried porcini in 100ml hot water for 5 min. Drain, keep the soaking liquid, and chop.",
+    "Toast pine nuts in a dry pan 2 min until golden. Set aside.",
+    "Dice onion and garlic. Slice chestnut mushrooms.",
+    "Heat oil in a wide pan. Cook onion and garlic 2 min, then add both mushrooms for 4 min.",
+    "Add beans, stock and porcini soaking liquid. Simmer 6–8 min, lightly mashing some beans for a creamy texture.",
+    "Stir in grated parmesan. Top with toasted pine nuts and chopped parsley."
+  ],
+  "tags": []
+}
