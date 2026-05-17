@@ -13,9 +13,11 @@ A personal weekly meal planner built as a single `index.html` with no build step
 **Core features:**
 - 7-day planner: pick breakfast, lunch, dinner per day
 - Per-meal person toggle: Ale / Nastya / Both (pescatarian filter applies when Nastya or Both)
+- Lunch and dinner menus are interchangeable — both slots share the same recipe pool
 - Collapsible day cards (all start collapsed)
-- Dual macro bars per day: one row per person vs their own targets
+- Dual macro bars per day: one row per person vs their own targets; each row toggleable
 - Total prep time per day (sum of dish times, person-agnostic)
+- Stats bar at top of Planner: two rows (Ale + Nastya), each collapsible by clicking the name; Nastya hidden by default
 - Shopping list tab: ingredients aggregated across all selected meals, 2× when shared
 - Recipe book with filters
 - Settings: separate full profiles for Ale and Nastya (Mifflin-St Jeor)
@@ -27,11 +29,11 @@ A personal weekly meal planner built as a single `index.html` with no build step
 ## Architecture
 
 ```
-index.html          Single file — all HTML, CSS, JS (~1735 lines)
+index.html          Single file — all HTML, CSS, JS (~1850 lines)
 recipes/
-  index.json        Auto-generated manifest of recipe IDs (by serve.ps1)
+  index.json        Manifest of recipe IDs — update manually or run serve.ps1
   _template.json    Copy-paste template for new recipes
-  *.json            One file per recipe (24 total)
+  *.json            One file per recipe (36 total)
 manifest.json       PWA manifest
 icons/icon.svg      App icon
 serve.ps1           Local dev server script (run via Ctrl+Shift+B in VSCode)
@@ -81,7 +83,7 @@ STORAGE_KEYS = {
 }
 ```
 
-### Whom values
+### Whom values (internal identifiers — do NOT rename, they are stored in localStorage)
 - `"alessio"` — only Ale eats; any dish allowed
 - `"anastasiia"` — only Nastya eats; pescatarian filter applies
 - `"both"` — both eat; pescatarian filter applies; shopping quantity ×2
@@ -95,7 +97,7 @@ STORAGE_KEYS = {
 | `buildDays()` | Renders all 7 day cards (collapsed by default); attaches expand/collapse click handler |
 | `renderMealsForDay(day)` | Re-renders meals inside a day card (dropdowns, whom toggle, recipe link) |
 | `renderDayMacros(day)` | Renders per-person macro bars + prep time for a day |
-| `getDishesByType(whom)` | Returns `{ breakfast:[], lunch:[], dinner:[] }` filtered by pescatarian if needed |
+| `getDishesByType(whom)` | Returns `{ breakfast:[], lunch:[], dinner:[] }` — lunch and dinner share the same pool |
 | `renderShopping()` | Aggregates all ingredients across the week; called on Shopping tab visit |
 | `renderRecipeBook()` | Called when Recipe Book tab is opened |
 | `populateSettings()` | Fills both profile forms; called when Settings tab is opened |
@@ -104,14 +106,28 @@ STORAGE_KEYS = {
 | `parseMinutes(timeStr)` | Extracts first integer from strings like "25 min", "35 min (mostly oven)" |
 | `formatQty(qty, unit)` | Converts g→kg, ml→l at 1000; formats display string |
 | `showToast(msg)` | 1.8s toast notification |
-| `updateStatsDisplay()` | Updates the 4-stat bar at the top of Planner with Ale's targets |
+| `updateStatsDisplay()` | Updates both Ale's and Nastya's rows in the top stats bar |
 
 ### Macro bar logic (`renderDayMacros`)
 - Iterates all MEAL_TYPES for the day
 - If `whom === "alessio"` or `"both"` → adds to Ale's totals
 - If `whom === "anastasiia"` or `"both"` → adds to Nastya's totals
+- Each `.day-macros-person` div has `data-person="ale"` or `data-person="nastya"`
 - Shows prep time (sum of `parseMinutes(dish.time)` for all non-empty, non-skip meals)
-- Hides a person's block entirely if they have 0 meals that day
+- Hides a person's block entirely if they have 0 meals that day OR if the body class hides them
+
+### Stats bar visibility toggle
+The top stats bar uses two `.stats-row` wrappers (`.stats-row-ale`, `.stats-row-nastya`).
+Clicking the person name cell toggles a CSS class on `<body>`:
+```
+body.hide-ale-targets     → collapses Ale's stats row + hides [data-person="ale"] macro bars
+body.hide-nastya-targets  → collapses Nastya's stats row + hides [data-person="nastya"] macro bars
+```
+`body.hide-nastya-targets` is added on page load (Nastya hidden by default).
+Name cell shows `▾` when expanded, `▸` when collapsed.
+
+### Lunch / dinner interchangeability
+`getDishesByType(whom)` puts every recipe with `type === "lunch"` or `type === "dinner"` into **both** the `lunch` and `dinner` buckets. Breakfast remains separate. This means all 31 lunch+dinner recipes appear in both meal slots.
 
 ---
 
@@ -153,7 +169,7 @@ STORAGE_KEYS = {
 **Valid types:** `breakfast`, `lunch`, `dinner`
 **pescatarian:** `true` if no meat/poultry (fish, eggs, dairy, legumes OK)
 
-To add a recipe: create `recipes/{id}.json`, then run serve.ps1 (it auto-regenerates `recipes/index.json`). Or push to GitHub.
+To add a recipe: create `recipes/{id}.json`, add the ID to `recipes/index.json` in alphabetical order, then push to GitHub. Running serve.ps1 also regenerates `index.json` automatically.
 
 ---
 
@@ -161,9 +177,11 @@ To add a recipe: create `recipes/{id}.json`, then run serve.ps1 (it auto-regener
 
 **Breakfasts (5):** b_cottage_toast, b_eggs_toast, b_oats_yogurt, b_omelet_oats, b_overnight_oats
 
-**Lunches (10):** l_beef_burrito_bowl, l_chicken_rice, l_chicken_wrap, l_crostino_burrata, l_egg_fried_rice, l_lentil_soup, l_minestrone, l_salmon_couscous, l_tuna_pasta
+**Lunches (9):** l_beef_burrito_bowl, l_chicken_rice, l_chicken_wrap, l_crostino_burrata, l_egg_fried_rice, l_lentil_soup, l_minestrone, l_salmon_couscous, l_tuna_pasta
 
-**Dinners (21):** d_beef_stir_fry, d_butter_bean_cassoulet, d_chicken_potatoes, d_chicken_souvlaki, d_chickpea_curry, d_cod_veg, d_curried_chickpea_carrot, d_harissa_chickpea_quinoa, d_harissa_trout, d_lentil_chicken, d_mushroom_beanotto, d_parmigiana_eggplant, d_pork_sweet_sour, d_salmon_hoisin, d_salmon_quinoa, d_shrimp_pasta, d_truffle_tagliatelle, d_tuna_potato_salad, d_turkey_meatballs, d_turkey_ragu_gnocchi, d_white_bean_steak
+**Dinners (22):** d_beef_stir_fry, d_butter_bean_cassoulet, d_chicken_potatoes, d_chicken_souvlaki, d_chickpea_curry, d_cod_veg, d_curried_chickpea_carrot, d_harissa_chickpea_quinoa, d_harissa_trout, d_lentil_chicken, d_mushroom_beanotto, d_parmigiana_eggplant, d_pork_sweet_sour, d_risotto_milanese, d_salmon_hoisin, d_salmon_quinoa, d_shrimp_pasta, d_truffle_tagliatelle, d_tuna_potato_salad, d_turkey_meatballs, d_turkey_ragu_gnocchi, d_white_bean_steak
+
+*Note: because lunch/dinner are interchangeable, all 31 lunch+dinner recipes appear in both meal slots.*
 
 ---
 
@@ -187,23 +205,33 @@ Fonts: `Fraunces` (serif body/headings), `JetBrains Mono` (labels, tags, monospa
 - Nastya active → `var(--accent-2)` (green)
 - Both active → `var(--plum)` (plum)
 
+**Stats row name colors:**
+- `.ale-name` → `var(--ink)`
+- `.nastya-name` → `var(--accent-2)`
+
 ---
 
 ## Important implementation notes
 
 1. **serve.ps1 must use ASCII only** — PowerShell 5.1 without UTF-8 BOM misinterprets Unicode characters. No em-dashes, box-drawing chars, curly quotes in serve.ps1.
 
-2. **state migration** — `loadAll()` migrates old `whom:"me"` → `"whom:"alessio"` automatically for backward compat with saved state.
+2. **Internal whom identifiers are `"alessio"` and `"anastasiia"`** — display names in the UI are "Ale" and "Nastya" but the internal JS/localStorage values must stay as `"alessio"` / `"anastasiia"` for backward compatibility with saved state. Never rename these strings in code.
 
-3. **index.json is auto-generated** — `serve.ps1` regenerates it from all `.json` files in `/recipes/` on every run. Never edit it manually; it will be overwritten. The `_template.json` is excluded from the scan.
+3. **state migration** — `loadAll()` migrates old `whom:"me"` → `"alessio"` automatically for backward compat with saved state.
 
-4. **Shopping list is lazy** — `renderShopping()` is called when the Shopping tab is visited, and also whenever meal state changes (dish selection, whom toggle, reset, random fill).
+4. **index.json** — `serve.ps1` regenerates it from all `.json` files in `/recipes/` on every run. The `_template.json` is excluded from the scan. When adding a recipe manually (without serve.ps1), add the ID to `index.json` in alphabetical order.
 
-5. **Collapsible days** — all days start collapsed. The expand/collapse state is NOT persisted to localStorage (intentional — fresh start on each load).
+5. **Shopping list is lazy** — `renderShopping()` is called when the Shopping tab is visited, and also whenever meal state changes (dish selection, whom toggle, reset, random fill).
 
-6. **AI Chef tab** — currently a "coming soon" placeholder (`panel-assistant`). No AI functionality. Future v2 feature.
+6. **Collapsible days** — all days start collapsed. The expand/collapse state is NOT persisted to localStorage (intentional — fresh start on each load).
 
-7. **PWA** — `manifest.json` + apple-touch-icon meta tags enable "Add to Home Screen". No service worker, so offline support is limited to browser cache.
+7. **Stats bar toggle** — `body.hide-nastya-targets` is added on page load so Nastya's row starts collapsed. Clicking either name cell calls `document.body.classList.toggle(...)`. The CSS handles everything else via `body.hide-X-targets` selectors — no JS DOM manipulation needed beyond the class toggle.
+
+8. **Nastya's save also calls `updateStatsDisplay()`** — so her stats row refreshes immediately when her profile is saved in Settings.
+
+9. **AI Chef tab** — currently a "coming soon" placeholder (`panel-assistant`). No AI functionality. Future v2 feature.
+
+10. **PWA** — `manifest.json` + apple-touch-icon meta tags enable "Add to Home Screen". No service worker, so offline support is limited to browser cache.
 
 ---
 

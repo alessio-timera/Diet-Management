@@ -408,6 +408,41 @@
     font-style: italic; color: var(--ink-soft);
     padding: 16px 0; text-align: center;
   }
+  .btn-price-toggle {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--ink-soft); background: transparent;
+    border: 1px solid var(--ink-soft); border-radius: 3px;
+    padding: 4px 10px; cursor: pointer; transition: all 0.15s;
+  }
+  .btn-price-toggle:hover { border-color: var(--accent-2); color: var(--accent-2); }
+  .btn-price-toggle.active { background: var(--accent-2); color: #fff; border-color: var(--accent-2); }
+  .shop-item { align-items: center; }
+  .ing-name { flex: 1; }
+  .price-cell { display: flex; align-items: center; gap: 4px; }
+  .price-inp {
+    width: 54px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    padding: 2px 4px; text-align: right;
+    border: 1px solid rgba(29,26,20,0.25); border-radius: 3px;
+    background: var(--paper); color: var(--ink);
+  }
+  .price-inp:focus { outline: none; border-color: var(--accent-2); }
+  .price-unit-lbl { font-size: 10px; color: var(--ink-soft); white-space: nowrap; }
+  .ing-cost {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 600;
+    color: var(--accent-2); white-space: nowrap; min-width: 52px; text-align: right;
+  }
+  .ing-cost:empty { min-width: 0; }
+  .shop-total {
+    display: flex; align-items: baseline; gap: 10px; margin-top: 20px;
+    padding: 10px 14px; background: var(--paper-2);
+    border: 1px solid rgba(29,26,20,0.15); border-radius: 3px; font-size: 14px;
+  }
+  .shop-total strong {
+    font-family: 'JetBrains Mono', monospace; font-size: 16px;
+    color: var(--accent-2); margin-left: auto;
+  }
+  .price-coverage { font-size: 11px; color: var(--ink-soft); }
 
   /* RECIPE BOOK */
   .filters {
@@ -765,6 +800,7 @@
     <div class="shopping">
       <div class="shop-head">
         <h3>What to buy <em style="color:var(--accent);font-style:italic;">this week</em></h3>
+        <button id="togglePrices" class="btn-price-toggle">Set prices</button>
         <div class="stamp">Auto-totaled · 2× when shared</div>
       </div>
       <div id="shoppingList"></div>
@@ -1015,7 +1051,156 @@ const STORAGE_KEYS = {
   state:    "weekly-plate:week",
   recipes:  "weekly-plate:ai-recipes",
   profile:  "weekly-plate:profile",
-  profileA: "weekly-plate:profile-anastasiia"
+  profileA: "weekly-plate:profile-anastasiia",
+  prices:   "weekly-plate:prices"
+};
+
+let PRICES = {};
+let priceMode = false;
+
+// M&S London average prices — price per base unit (per g, per ml, per pc/slice/clove/tbsp/tsp)
+const DEFAULT_PRICES = {
+  // Protein
+  "Chicken breast::g":                              0.014,
+  "Chicken thighs (boneless, skinless)::g":         0.010,
+  "Salmon fillet::g":                               0.024,
+  "Trout fillet::g":                                0.018,
+  "Cod fillet::g":                                  0.020,
+  "Shrimp (peeled, deveined)::g":                   0.020,
+  "Sirloin steak::g":                               0.030,
+  "Beef strips (sirloin or rump)::g":               0.022,
+  "Lean ground beef (5% fat)::g":                   0.016,
+  "Pork tenderloin::g":                             0.014,
+  "Ground turkey::g":                               0.010,
+  "Turkey mince::g":                                0.010,
+  "Smoked turkey sausage::g":                       0.016,
+  "Canned tuna in olive oil::g":                    0.0156,
+  // Produce
+  "Asparagus::g":                                   0.0078,
+  "Avocado::pc":                                    1.00,
+  "Baby plum tomatoes::g":                          0.0067,
+  "Baby spinach::g":                                0.010,
+  "Banana::pc":                                     0.20,
+  "Bell pepper::pc":                                0.80,
+  "Black truffle::g":                               1.50,
+  "Broccoli::g":                                    0.003,
+  "Carrot::pc":                                     0.25,
+  "Carrots::g":                                     0.001,
+  "Cauliflower::g":                                 0.0033,
+  "Cavolo nero::g":                                 0.009,
+  "Cherry tomatoes::g":                             0.0067,
+  "Chestnut mushrooms::g":                          0.005,
+  "Courgette::pc":                                  0.80,
+  "Cucumber::pc":                                   0.80,
+  "Eggplant (aubergine)::g":                        0.0043,
+  "Fresh basil::g":                                 0.040,
+  "Fresh coriander::g":                             0.040,
+  "Fresh ginger::g":                                0.006,
+  "Fresh parsley::g":                               0.033,
+  "Garlic::cloves":                                 0.05,
+  "Ginger::g":                                      0.006,
+  "Green beans::g":                                 0.0071,
+  "Lettuce::g":                                     0.006,
+  "Lemon::pc":                                      0.40,
+  "Lime::pc":                                       0.40,
+  "Onion::pc":                                      0.30,
+  "Parsley (fresh)::g":                             0.033,
+  "Pineapple chunks::g":                            0.0083,
+  "Potatoes::g":                                    0.002,
+  "Radishes::g":                                    0.005,
+  "Red bell pepper::pc":                            0.80,
+  "Red onion::pc":                                  0.40,
+  "Savoy cabbage::g":                               0.003,
+  "Spinach (fresh)::g":                             0.0075,
+  "Spring onion::pc":                               0.083,
+  "Spring onions::pc":                              0.083,
+  // Dairy & Eggs
+  "Butter::g":                                      0.010,
+  "Burrata::g":                                     0.024,
+  "Cheddar or feta cheese::g":                      0.0175,
+  "Cottage cheese::g":                              0.0067,
+  "Egg::pc":                                        0.50,
+  "Eggs::pc":                                       0.50,
+  "Grated hard Italian-style cheese::g":            0.030,
+  "Greek yoghurt::g":                               0.005,
+  "Greek yogurt (0-2% fat)::g":                     0.005,
+  "Milk::ml":                                       0.0013,
+  "Mozzarella (fior di latte)::g":                  0.020,
+  "Parmigiana Reggiano::g":                         0.0267,
+  "Parmigiano Reggiano::g":                         0.0267,
+  "Parmigiano Reggiano (grated)::g":                0.0267,
+  "Parmesan::g":                                    0.0233,
+  "Parmesan cheese::g":                             0.0233,
+  // Pantry
+  "Apple cider vinegar::tbsp":                      0.09,
+  "Arborio rice::g":                                0.005,
+  "Basmati or long-grain rice::g":                  0.003,
+  "Black beans (canned)::g":                        0.0025,
+  "Breadcrumbs::g":                                 0.00375,
+  "Butter beans (canned)::pc":                      1.00,
+  "Canned coconut milk (light)::ml":                0.00375,
+  "Canned crushed tomatoes::g":                     0.0025,
+  "Canned whole tomatoes::g":                       0.0025,
+  "Cannellini beans::g":                            0.0025,
+  "Chickpeas::g":                                   0.0025,
+  "Chickpeas (canned)::g":                          0.0025,
+  "Coarse salt::tsp":                               0.01,
+  "Coconut milk::ml":                               0.00375,
+  "Couscous::g":                                    0.004,
+  "Cumin & paprika::tsp each":                      0.05,
+  "Curry powder::tbsp":                             0.11,
+  "Curry powder::tsp":                              0.04,
+  "Dijon mustard::tsp":                             0.05,
+  "Dried porcini mushrooms::g":                     0.10,
+  "Dry tagliatelle::g":                             0.005,
+  "Dry white wine::ml":                             0.0107,
+  "Egg noodles::g":                                 0.0067,
+  "Extra-virgin olive oil::ml":                     0.014,
+  "Fine salt::tsp":                                 0.01,
+  "Fresh gnocchi::g":                               0.005,
+  "Green or brown lentils (cooked, canned ok)::g":  0.0025,
+  "Harissa paste::tbsp":                            0.19,
+  "Hoisin sauce::tbsp":                             0.15,
+  "Honey::g":                                       0.012,
+  "Honey::tbsp":                                    0.25,
+  "Jasmine rice::g":                                0.003,
+  "Mixed dried herbs::tsp":                         0.03,
+  "Mixed Italian herbs::tsp":                       0.03,
+  "Mixed nuts (almonds/walnuts)::g":                0.025,
+  "Olives (kalamata)::g":                           0.011,
+  "Passata::ml":                                    0.00176,
+  "Peanut butter::g":                               0.009,
+  "Peanut or seed oil (for frying)::ml":            0.006,
+  "Pesto::g":                                       0.013,
+  "Pine nuts::g":                                   0.050,
+  "Quinoa::g":                                      0.007,
+  "Red lentils::g":                                 0.004,
+  "Red wine stock paste::g":                        0.013,
+  "Rice vinegar::tbsp":                             0.075,
+  "Rolled oats::g":                                 0.0015,
+  "Rosemary::tsp":                                  0.03,
+  "Saffron::tsp":                                   3.75,
+  "Sauerkraut::g":                                  0.005,
+  "Sea salt::tsp":                                  0.02,
+  "Sea salt flakes::tsp":                           0.03,
+  "Sesame oil::tsp":                                0.063,
+  "Soy sauce::ml":                                  0.013,
+  "Soy sauce::tbsp":                                0.20,
+  "Sugar::tsp":                                     0.01,
+  "Tahini::tbsp":                                   0.15,
+  "Tomato passata::ml":                             0.00176,
+  "Tomato paste::tbsp":                             0.11,
+  "Tomato puree::g":                                0.0075,
+  "Vegetable stock::ml":                            0.003,
+  "Whole-wheat pasta::g":                           0.004,
+  // Bakery
+  "Ciabatta or Italian bread::g":                   0.00625,
+  "Ciabatta roll::pc":                              1.00,
+  "Large tortilla wraps (whole wheat)::pc":         0.25,
+  "Pita bread::pc":                                 0.25,
+  "Whole-grain bread::slices":                      0.12,
+  // Frozen
+  "Frozen peas & corn mix::g":                      0.002,
 };
 
 function loadAll() {
@@ -1068,6 +1253,18 @@ function loadAll() {
       }
     }
   } catch (e) {}
+
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.prices);
+    if (raw) {
+      const parsed = JSON.parse(raw);
+      if (parsed && typeof parsed === "object") PRICES = parsed;
+    }
+  } catch (e) {}
+  // Seed any missing keys from built-in defaults (user overrides are preserved)
+  for (const [k, v] of Object.entries(DEFAULT_PRICES)) {
+    if (!(k in PRICES)) PRICES[k] = v;
+  }
 }
 
 function saveState() {
@@ -1080,6 +1277,10 @@ function saveAIRecipes() {
     if (!BUILT_IN_IDS.has(id)) ai[id] = dish;
   }
   try { localStorage.setItem(STORAGE_KEYS.recipes, JSON.stringify(ai)); } catch (e) {}
+}
+
+function savePrices() {
+  try { localStorage.setItem(STORAGE_KEYS.prices, JSON.stringify(PRICES)); } catch (e) {}
 }
 
 /* ===========================================================
@@ -1354,18 +1555,83 @@ function renderShopping() {
     byCat[t.cat].push(t);
   }
   const catOrder = ["Protein", "Produce", "Dairy & Eggs", "Pantry", "Bakery", "Frozen"];
+  const priceKey = (t) => `${t.item}::${t.unit}`;
   let html = `<div class="shop-cats">`;
   for (const cat of catOrder) {
     if (!byCat[cat]) continue;
     byCat[cat].sort((a, b) => a.item.localeCompare(b.item));
     html += `<div class="shop-cat"><h4>${cat}</h4><ul>`;
     for (const t of byCat[cat]) {
-      html += `<li><span>${t.item}</span><span class="qty">${formatQty(t.qty, t.unit)}</span></li>`;
+      const pk = priceKey(t);
+      const ppu = PRICES[pk] || 0;
+      const cost = t.qty * ppu;
+      const displayVal = ppu > 0 ? (ppu * priceDisplayFactor(t.unit)).toFixed(2) : "";
+      const costHtml = ppu > 0 ? `<span class="ing-cost">£&thinsp;${cost.toFixed(2)}</span>` : `<span class="ing-cost"></span>`;
+      const priceHtml = priceMode
+        ? `<span class="price-cell"><input type="number" class="price-inp" min="0" step="0.01" placeholder="0.00" data-key="${pk}" data-unit="${t.unit}" value="${displayVal}"><span class="price-unit-lbl">${priceLabelFor(t.unit)}</span></span>`
+        : "";
+      html += `<li class="shop-item" data-qty="${t.qty}" data-key="${pk}" data-unit="${t.unit}"><span class="ing-name">${t.item}</span><span class="qty">${formatQty(t.qty, t.unit)}</span>${priceHtml}${costHtml}</li>`;
     }
     html += `</ul></div>`;
   }
   html += `</div>`;
   shoppingList.innerHTML = html;
+  shoppingList.querySelectorAll(".price-inp").forEach(inp => inp.addEventListener("input", onPriceInput));
+  updateShopTotal();
+}
+
+function priceDisplayFactor(unit) {
+  return (unit === "g" || unit === "ml") ? 100 : 1;
+}
+
+function priceLabelFor(unit) {
+  const map = { g: "£/100g", ml: "£/100ml", pc: "£/pc", cloves: "£/clove",
+                slices: "£/slice", tbsp: "£/tbsp", tsp: "£/tsp", kg: "£/kg", l: "£/l" };
+  return map[unit] || `£/${unit}`;
+}
+
+function onPriceInput(e) {
+  const inp = e.target;
+  const pk = inp.dataset.key;
+  const unit = inp.dataset.unit;
+  const displayVal = parseFloat(inp.value) || 0;
+  const ppu = displayVal / priceDisplayFactor(unit);
+  if (ppu > 0) PRICES[pk] = ppu;
+  else delete PRICES[pk];
+  savePrices();
+  const li = inp.closest("li.shop-item");
+  const qty = parseFloat(li.dataset.qty);
+  const costSpan = li.querySelector(".ing-cost");
+  if (ppu > 0) {
+    costSpan.innerHTML = `£&thinsp;${(qty * ppu).toFixed(2)}`;
+  } else {
+    costSpan.innerHTML = "";
+  }
+  updateShopTotal();
+}
+
+function updateShopTotal() {
+  let total = 0, priced = 0, all = 0;
+  shoppingList.querySelectorAll("li.shop-item").forEach(li => {
+    all++;
+    const ppu = PRICES[li.dataset.key] || 0;
+    if (ppu > 0) {
+      total += parseFloat(li.dataset.qty) * ppu;
+      priced++;
+    }
+  });
+  let totalEl = shoppingList.querySelector(".shop-total");
+  if (priced > 0) {
+    const coverage = priced < all ? `<span class="price-coverage">${priced}/${all} items priced</span>` : "";
+    if (!totalEl) {
+      totalEl = document.createElement("div");
+      totalEl.className = "shop-total";
+      shoppingList.appendChild(totalEl);
+    }
+    totalEl.innerHTML = `<span>Estimated total</span><strong>£&thinsp;${total.toFixed(2)}</strong>${coverage}`;
+  } else if (totalEl) {
+    totalEl.remove();
+  }
 }
 
 function parseMinutes(timeStr) {
@@ -1749,6 +2015,13 @@ document.getElementById("randomBtn").addEventListener("click", () => {
 });
 
 document.getElementById("printBtn").addEventListener("click", () => window.print());
+
+document.getElementById("togglePrices").addEventListener("click", function() {
+  priceMode = !priceMode;
+  this.textContent = priceMode ? "Done" : "Set prices";
+  this.classList.toggle("active", priceMode);
+  renderShopping();
+});
 
 /* ===========================================================
    TOAST
