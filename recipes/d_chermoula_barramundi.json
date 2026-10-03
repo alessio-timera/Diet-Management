@@ -1,0 +1,35 @@
+{
+  "id": "d_chermoula_barramundi",
+  "name": "Chermoula Barramundi with Herby Couscous & Chilli-Garlic Oil",
+  "type": "dinner",
+  "time": "25 min",
+  "kcal": 490,
+  "protein": 31,
+  "carbs": 50,
+  "fat": 14,
+  "pescatarian": true,
+  "source": "built-in",
+  "ingredients": [
+    { "item": "Barramundi fillet",     "qty": 110, "unit": "g",      "cat": "Protein"      },
+    { "item": "Couscous",              "qty": 60,  "unit": "g",      "cat": "Pantry"       },
+    { "item": "Vegetable stock paste", "qty": 5,   "unit": "g",      "cat": "Pantry"       },
+    { "item": "Chermoula spice mix",   "qty": 1,   "unit": "tsp",    "cat": "Pantry"       },
+    { "item": "Capers",                "qty": 15,  "unit": "g",      "cat": "Pantry"       },
+    { "item": "Chilli flakes",         "qty": 0.5, "unit": "tsp",    "cat": "Pantry"       },
+    { "item": "Olive oil",             "qty": 15,  "unit": "ml",     "cat": "Pantry"       },
+    { "item": "Garlic",                "qty": 0.5, "unit": "cloves", "cat": "Produce"      },
+    { "item": "Baby cucumber",         "qty": 0.5, "unit": "pc",     "cat": "Produce"      },
+    { "item": "Fresh coriander",       "qty": 5,   "unit": "g",      "cat": "Produce"      },
+    { "item": "Wild rocket",           "qty": 10,  "unit": "g",      "cat": "Produce"      },
+    { "item": "Greek yoghurt",         "qty": 38,  "unit": "g",      "cat": "Dairy & Eggs" }
+  ],
+  "steps": [
+    "Preheat the oven to 220°C/200°C fan/gas mark 7. Bring 100 ml water per person and the vegetable stock paste to the boil in a saucepan. Remove from the heat, stir in the couscous, half the chermoula spice mix and a drizzle of olive oil, then cover with a lid and leave for 8-10 min.",
+    "Meanwhile, lay the barramundi skin-side down on a lined baking tray. Drizzle with oil, season with salt, sprinkle over the remaining chermoula and rub to coat. Bake on the middle shelf until opaque in the middle, 12-14 min.",
+    "While everything cooks, peel and grate the garlic. Roughly chop the capers. Trim and halve the cucumber lengthways, then cut into 1 cm half-moons. Roughly chop the coriander (stalks and all).",
+    "Heat the remaining olive oil in a small saucepan on low heat. Once hot, add the chilli flakes (less if you prefer it milder) and garlic, then immediately remove from the heat and stir until fragrant. Transfer to a small bowl and season with salt and pepper.",
+    "Fluff up the couscous with a fork and stir through the capers, cucumber, rocket and half the coriander. Drizzle with a little olive oil and season with salt and pepper. Don't add the leaves too early or they'll go soggy. Stir the remaining coriander into the chilli-garlic oil.",
+    "Share the couscous between bowls. Top with the baked barramundi, dollop on the Greek yoghurt and drizzle over the chilli-garlic oil."
+  ],
+  "tags": ["hellofresh"]
+}

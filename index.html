@@ -1061,6 +1061,7 @@ let priceMode = false;
 // M&S London average prices — price per base unit (per g, per ml, per pc/slice/clove/tbsp/tsp)
 const DEFAULT_PRICES = {
   // Protein
+  "Barramundi fillet::g":                           0.022,
   "Chicken breast::g":                              0.014,
   "Chicken thighs (boneless, skinless)::g":         0.010,
   "Salmon fillet::g":                               0.024,
@@ -1078,6 +1079,7 @@ const DEFAULT_PRICES = {
   // Produce
   "Asparagus::g":                                   0.0078,
   "Avocado::pc":                                    1.00,
+  "Baby cucumber::pc":                              0.35,
   "Baby plum tomatoes::g":                          0.0067,
   "Baby spinach::g":                                0.010,
   "Banana::pc":                                     0.20,
@@ -1114,6 +1116,7 @@ const DEFAULT_PRICES = {
   "Spinach (fresh)::g":                             0.0075,
   "Spring onion::pc":                               0.083,
   "Spring onions::pc":                              0.083,
+  "Wild rocket::g":                                 0.020,
   // Dairy & Eggs
   "Butter::g":                                      0.010,
   "Burrata::g":                                     0.024,
@@ -1142,8 +1145,11 @@ const DEFAULT_PRICES = {
   "Canned crushed tomatoes::g":                     0.0025,
   "Canned whole tomatoes::g":                       0.0025,
   "Cannellini beans::g":                            0.0025,
+  "Capers::g":                                      0.015,
+  "Chermoula spice mix::tsp":                       0.06,
   "Chickpeas::g":                                   0.0025,
   "Chickpeas (canned)::g":                          0.0025,
+  "Chilli flakes::tsp":                             0.04,
   "Coarse salt::tsp":                               0.01,
   "Coconut milk::ml":                               0.00375,
   "Couscous::g":                                    0.004,
@@ -1192,6 +1198,7 @@ const DEFAULT_PRICES = {
   "Tomato paste::tbsp":                             0.11,
   "Tomato puree::g":                                0.0075,
   "Vegetable stock::ml":                            0.003,
+  "Vegetable stock paste::g":                       0.013,
   "Whole-wheat pasta::g":                           0.004,
   // Bakery
   "Ciabatta or Italian bread::g":                   0.00625,

@@ -33,7 +33,7 @@ index.html          Single file — all HTML, CSS, JS (~1850 lines)
 recipes/
   index.json        Manifest of recipe IDs — update manually or run serve.ps1
   _template.json    Copy-paste template for new recipes
-  *.json            One file per recipe (36 total)
+  *.json            One file per recipe (37 total)
 manifest.json       PWA manifest
 icons/icon.svg      App icon
 serve.ps1           Local dev server script (run via Ctrl+Shift+B in VSCode)
@@ -127,7 +127,7 @@ body.hide-nastya-targets  → collapses Nastya's stats row + hides [data-person=
 Name cell shows `▾` when expanded, `▸` when collapsed.
 
 ### Lunch / dinner interchangeability
-`getDishesByType(whom)` puts every recipe with `type === "lunch"` or `type === "dinner"` into **both** the `lunch` and `dinner` buckets. Breakfast remains separate. This means all 31 lunch+dinner recipes appear in both meal slots.
+`getDishesByType(whom)` puts every recipe with `type === "lunch"` or `type === "dinner"` into **both** the `lunch` and `dinner` buckets. Breakfast remains separate. This means all 32 lunch+dinner recipes appear in both meal slots.
 
 ---
 
@@ -173,15 +173,15 @@ To add a recipe: create `recipes/{id}.json`, add the ID to `recipes/index.json` 
 
 ---
 
-## Current recipes (36 total)
+## Current recipes (37 total)
 
 **Breakfasts (5):** b_cottage_toast, b_eggs_toast, b_oats_yogurt, b_omelet_oats, b_overnight_oats
 
 **Lunches (9):** l_beef_burrito_bowl, l_chicken_rice, l_chicken_wrap, l_crostino_burrata, l_egg_fried_rice, l_lentil_soup, l_minestrone, l_salmon_couscous, l_tuna_pasta
 
-**Dinners (22):** d_beef_stir_fry, d_butter_bean_cassoulet, d_chicken_potatoes, d_chicken_souvlaki, d_chickpea_curry, d_cod_veg, d_curried_chickpea_carrot, d_harissa_chickpea_quinoa, d_harissa_trout, d_lentil_chicken, d_mushroom_beanotto, d_parmigiana_eggplant, d_pork_sweet_sour, d_risotto_milanese, d_salmon_hoisin, d_salmon_quinoa, d_shrimp_pasta, d_truffle_tagliatelle, d_tuna_potato_salad, d_turkey_meatballs, d_turkey_ragu_gnocchi, d_white_bean_steak
+**Dinners (23):** d_beef_stir_fry, d_butter_bean_cassoulet, d_chermoula_barramundi, d_chicken_potatoes, d_chicken_souvlaki, d_chickpea_curry, d_cod_veg, d_curried_chickpea_carrot, d_harissa_chickpea_quinoa, d_harissa_trout, d_lentil_chicken, d_mushroom_beanotto, d_parmigiana_eggplant, d_pork_sweet_sour, d_risotto_milanese, d_salmon_hoisin, d_salmon_quinoa, d_shrimp_pasta, d_truffle_tagliatelle, d_tuna_potato_salad, d_turkey_meatballs, d_turkey_ragu_gnocchi, d_white_bean_steak
 
-*Note: because lunch/dinner are interchangeable, all 31 lunch+dinner recipes appear in both meal slots.*
+*Note: because lunch/dinner are interchangeable, all 32 lunch+dinner recipes appear in both meal slots.*
 
 ---
 
